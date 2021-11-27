@@ -14,6 +14,7 @@ import { ViewsModule } from './views/views.module';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { SharedModule } from './shared/shared.module';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { SharedModule } from './shared/shared.module';
     BlankComponent,
     FullComponent
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

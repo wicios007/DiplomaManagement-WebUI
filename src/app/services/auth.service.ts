@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { catchError, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,9 @@ export class AuthService {
 
   ApiURL : string = environment.ApiURL
 
-  constructor(private http : HttpClient) { }
+  isLogged : Boolean = false
+
+  constructor(private http : HttpClient, private router : Router) { }
 
 
   
@@ -36,14 +39,27 @@ export class AuthService {
 
   isLoggedIn() : Boolean{
     let user = localStorage.getItem('currentUser')
-    if(user === null)
+    if(user === null){
+      this.isLogged = false
       return false
+    }
+    this.isLogged = true
     return true
     
   }
 
   logOut(){
     localStorage.removeItem('currentUser')
+    sessionStorage.removeItem('role')
+    sessionStorage.removeItem('token')
+    this.isLogged = false
+    this.router.navigate([''])
+  }
+
+  getRole() : string | undefined{
+    const role = sessionStorage.getItem('role')
+
+    return role?.toString()
   }
 
 

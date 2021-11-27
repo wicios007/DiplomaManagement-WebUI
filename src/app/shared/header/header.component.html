@@ -6,11 +6,8 @@
       </a>
 
       <ul class="nav nav-pills">
-        <li class="nav-item"><a class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a class="nav-link">Features</a></li>
-        <li class="nav-item"><a class="nav-link">Pricing</a></li>
-        <li class="nav-item"><a class="nav-link">FAQs</a></li>
-        <li class="nav-item"><a class="nav-link">About</a></li>
+        <li class="nav-item"><a href="#" class="nav-link disabled">{{loggedUser}}</a></li>
+        <li class="nav-item"><button class="btn btn-primary" (click) = "logout()">Wyloguj się</button></li>
       </ul>
     </header>
   </div>

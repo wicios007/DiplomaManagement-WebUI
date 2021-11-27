@@ -10,6 +10,7 @@ import { AppModule } from '../app.module';
 import { MaterialModule } from '../material.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { AdminNavbarComponent } from './admin/admin-navbar/admin-navbar.component';
 
 
 
@@ -19,7 +20,8 @@ import { SharedModule } from '../shared/shared.module';
     AdminComponent,
     RegisterComponent,
     PromoterComponent,
-    StudentComponent
+    StudentComponent,
+    AdminNavbarComponent
   ],
   imports: [
     CommonModule,
