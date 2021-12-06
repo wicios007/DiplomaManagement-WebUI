@@ -61,5 +61,9 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
     this.router.navigate(['/authorization/login']);
     return false;
   }
+
+  // getToken() : string | null{
+  //   return sessionStorage.getItem('token')
+  // }
   
 }

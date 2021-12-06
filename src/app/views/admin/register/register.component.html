@@ -1,8 +1,107 @@
 <app-header>
+
 </app-header>
 <app-admin-navbar>
+
 </app-admin-navbar>
 <router-outlet>
+<div class="container mt-5 md-3">
+    <mat-card id="register-card">
+        <mat-card-title class="text-center">
+            Rejestracja nowego użytkownika
+        </mat-card-title>
+        <mat-card-content>
+            <form class="d-flex flex-column" [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput [formControl]="$any(form).controls['email']">
+                        <mat-error
+                            *ngIf="$any(form).controls['email'].hasError('required') && $any(form).controls['email'].touched"
+                            class="text-danger support-text">Email jest wymagany</mat-error>
+                        <mat-error
+                            *ngIf="$any(form).controls['email'].hasError('email') && $any(form).controls['email'].touched"
+                            class="text-danger support-text">Email jest niepoprawny</mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Hasło</mat-label>
+                        <input matInput type="password" [formControl]="$any(form).controls['password']">
+                        <mat-error
+                            *ngIf="$any(form).controls['password'].hasError('required') && $any(form).controls['password'].touched"
+                            class="text-danger support-text">Hasło jest wymagane</mat-error>
+                        <mat-error
+                            *ngIf="$any(form).controls['password'].hasError('minlength') && $any(form).controls['password'].touched"
+                            class="text-danger support-text">Hasło musi mieć co najmniej 8 znaków</mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Potwierdź hasło</mat-label>
+                        <input matInput type="password" [formControl]="$any(form).controls['confirmPassword']">
+                        <mat-error
+                            *ngIf="$any(form).controls['confirmPassword'].hasError('required') && $any(form).controls['confirmPassword'].touched"
+                            class="text-danger support-text">Hasło jest wymagane</mat-error>
+                        <mat-error
+                            *ngIf="$any(form).controls['confirmPassword'].hasError('minlength') && $any(form).controls['confirmPassword'].touched"
+                            class="text-danger support-text">Hasło musi mieć co najmniej 8 znaków</mat-error>
+                        <mat-error
+                            *ngIf="$any(form).controls['confirmPassword'].hasError('matching') && $any(form).controls['confirmPassword'].touched"
+                            class="text-danger support-text">Hasła muszą się zgadzać</mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Imię</mat-label>
+                        <input matInput type="text" [formControl]="$any(form).controls['firstName']">
+                        <mat-error
+                            *ngIf="$any(form).controls['firstName'].hasError('required') && $any(form).controls['firstName'].touched"
+                            class="text-danger support-text">Imię jest wymagane</mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nazwisko</mat-label>
+                        <input matInput type="text" [formControl]="$any(form).controls['lastName']">
+                        <mat-error
+                            *ngIf="$any(form).controls['lastName'].hasError('required') && $any(form).controls['lastName'].touched"
+                            class="text-danger support-text">Hasło jest wymagane</mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field apperance="fill">
+                        <mat-label>Rola</mat-label>
+                        <mat-select formControlName="roleId">
+                            <mat-option *ngFor="let role of roles" [value]="role.value">
+                                {{role.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div *ngIf="$any(form).controls['roleId'].value == 1">
+                    <mat-form-field apperance="fill">
+                        <mat-label>Tytuł</mat-label>
+                        <input matInput type="text" [formControl]="$any(form).controls['promoterTitle']">
+                    </mat-form-field>
+                </div>
+                <div *ngIf="$any(form).controls['roleId'].value == 2">
+                    <mat-form-field apperance="fill">
+                        <mat-label>Numer indeksu</mat-label>
+                        <input matInput type="text" [formControl]="$any(form).controls['studentIndexNumber']">
+                        <small
+                            *ngIf="$any(form).controls['studentIndexNumber'].hasError('pattern') && $any(form).controls['studentIndexNumber'].touched"
+                            class="text-danger support-text">Numer indeksu jest niepoprawny</small>
+                    </mat-form-field>
+                </div>
+                <button mat-raised-button color="primary" class="btn-block" type="submit"
+                    [disabled]="!$any(form).valid">Zarejestruj</button>
+
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
 </router-outlet>
 <app-footer>
+
 </app-footer>

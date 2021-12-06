@@ -11,6 +11,8 @@ import { MaterialModule } from '../material.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { AdminNavbarComponent } from './admin/admin-navbar/admin-navbar.component';
+import { UserListComponent } from './admin/user-list/user-list.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -21,14 +23,15 @@ import { AdminNavbarComponent } from './admin/admin-navbar/admin-navbar.componen
     RegisterComponent,
     PromoterComponent,
     StudentComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    UserListComponent
   ],
   imports: [
     CommonModule,
     ViewsRoutingModule,
     MaterialModule,
-    SharedModule
-
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class ViewsModule { }

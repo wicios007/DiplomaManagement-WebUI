@@ -34,5 +34,6 @@
                     [disabled]="!$any(form).valid">Zaloguj się</button>
             </form>
         </mat-card-content>
+        <div class="alert alert-danger" *ngIf="errorString!=''">{{errorString}}</div>
     </mat-card>
 </div>

@@ -1,9 +1,18 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { catchError, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthGuard } from '../guards/auth.guard';
+import { TokenService } from './token.service';
+
+
+interface User{
+  email : string;
+  firstName : string;
+  lastName : string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +23,7 @@ export class AuthService {
 
   isLogged : Boolean = false
 
-  constructor(private http : HttpClient, private router : Router) { }
-
+  constructor(private http : HttpClient, private token : TokenService, private router : Router) { }
 
   
   login(data: any){
@@ -25,15 +33,41 @@ export class AuthService {
         // sessionStorage.setItem('currentUser', data.email) //dlaczego przy próbie ustawienia session storage wartosc currentUser jest undefined, a przy localstorage juz nie?
         localStorage.setItem('currentUser', data.email)
       }),
-      catchError(this.handleError('login', []))
+      catchError((err) => {
+        console.log("err service")
+        console.log(err)
+        return throwError(err)
+      })
+      //catchError(this.handleError('login', []))
     )
   }
 
   register(data : any){
-    return this.http.post<any>(this.ApiURL + 'account/register', data)
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.token.getToken()}`
+      })
+    }
+    
+    return this.http.post<any>(this.ApiURL + 'account/register', data, httpOptions)
+    .pipe(
+      catchError((err) => {
+        console.log('err service')
+        //console.error(err)
+        return throwError(err)
+      })
+      //tap(),
+      //catchError(this.handleError("register", []))
+    )
+  }
+
+  getUsers(){
+    return this.http.get<User[]>(this.ApiURL + "account/users")
     .pipe(
       tap(),
-      catchError(this.handleError("register", []))
+      catchError(this.handleError("getUsers", []))
     )
   }
 
