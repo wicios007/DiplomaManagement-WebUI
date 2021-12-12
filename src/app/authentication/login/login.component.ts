@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
         //console.log(res);
         if (res.access_token) {
           sessionStorage.setItem('token', res.access_token);
-          sessionStorage.setItem('role', res.user_role)
+          sessionStorage.setItem('role', res.user_role),
+          sessionStorage.setItem('valid_to', res.expires_in)
 
           switch (res.user_role) {
             case "Admin":

@@ -13,6 +13,10 @@ import { SharedModule } from '../shared/shared.module';
 import { AdminNavbarComponent } from './admin/admin-navbar/admin-navbar.component';
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StudentNavbarComponent } from './student/student-navbar/student-navbar.component';
+import { PromoterNavbarComponent } from './promoter/promoter-navbar/promoter-navbar.component';
+import { AddThesisComponent } from './student/add-thesis/add-thesis.component';
+import { ThesisListComponent } from './student/thesis-list/thesis-list.component';
 
 
 
@@ -24,7 +28,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     PromoterComponent,
     StudentComponent,
     AdminNavbarComponent,
-    UserListComponent
+    UserListComponent,
+    StudentNavbarComponent,
+    PromoterNavbarComponent,
+    AddThesisComponent,
+    ThesisListComponent
   ],
   imports: [
     CommonModule,

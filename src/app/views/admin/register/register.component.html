@@ -1,6 +1,3 @@
-<app-header>
-
-</app-header>
 <app-admin-navbar>
 
 </app-admin-navbar>
@@ -70,7 +67,7 @@
                     </mat-form-field>
                 </div>
                 <div>
-                    <mat-form-field apperance="fill">
+                    <mat-form-field appearance="fill">
                         <mat-label>Rola</mat-label>
                         <mat-select formControlName="roleId">
                             <mat-option *ngFor="let role of roles" [value]="role.value">
@@ -79,14 +76,26 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
+                <div *ngIf="this.isFetched && ($any(form).controls['roleId'].value == 1 || $any(form).controls['roleId'].value == 2)">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Wydział</mat-label>
+                        <mat-select formControlName="departmentId">
+                            <mat-option *ngFor="let department of departments" [value]="department.id">
+                                {{department.initials}}-{{department.name}}
+                            </mat-option> 
+                        </mat-select>
+                    </mat-form-field>
+                </div>
                 <div *ngIf="$any(form).controls['roleId'].value == 1">
-                    <mat-form-field apperance="fill">
+                    <div>
+                    <mat-form-field appearance="fill">
                         <mat-label>Tytuł</mat-label>
                         <input matInput type="text" [formControl]="$any(form).controls['promoterTitle']">
                     </mat-form-field>
                 </div>
+                </div>
                 <div *ngIf="$any(form).controls['roleId'].value == 2">
-                    <mat-form-field apperance="fill">
+                    <mat-form-field appearance="fill">
                         <mat-label>Numer indeksu</mat-label>
                         <input matInput type="text" [formControl]="$any(form).controls['studentIndexNumber']">
                         <small
@@ -94,14 +103,12 @@
                             class="text-danger support-text">Numer indeksu jest niepoprawny</small>
                     </mat-form-field>
                 </div>
+
                 <button mat-raised-button color="primary" class="btn-block" type="submit"
-                    [disabled]="!$any(form).valid">Zarejestruj</button>
+                [disabled]="!$any(form).valid" >Zarejestruj</button> 
 
             </form>
         </mat-card-content>
     </mat-card>
 </div>
 </router-outlet>
-<app-footer>
-
-</app-footer>

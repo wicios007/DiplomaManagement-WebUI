@@ -5,7 +5,9 @@ import { AdminComponent } from './admin/admin.component';
 import { RegisterComponent } from './admin/register/register.component';
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { PromoterComponent } from './promoter/promoter.component';
+import { AddThesisComponent } from './student/add-thesis/add-thesis.component';
 import { StudentComponent } from './student/student.component';
+import { ThesisListComponent } from './student/thesis-list/thesis-list.component';
 
 
 const routes: Routes = [
@@ -54,10 +56,25 @@ const routes: Routes = [
         component: StudentComponent
       },
       {
+        canActivate: [AuthGuard],
+        data : {
+          role: ['Admin', 'Student']
+        },
+        path: 'student/addThesis',
+        component: AddThesisComponent
+      },
+      {
+        canActivate: [AuthGuard],
+        data : {
+          role: ['Admin', 'Student']
+        },
+        path: 'student/thesisList',
+        component: ThesisListComponent
+      },
+      {
         path: '**',
         redirectTo: 'authentication/404'
       }
-
     ]
   }
 ];

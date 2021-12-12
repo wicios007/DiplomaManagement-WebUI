@@ -15,6 +15,12 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthGuard } from './guards/auth.guard';
+import {
+  NgxAwesomePopupModule,
+  DialogConfigModule,
+  ConfirmBoxConfigModule,
+  ToastNotificationConfigModule
+} from '@costlydeveloper/ngx-awesome-popup';
 
 @NgModule({
   declarations: [
@@ -31,7 +37,11 @@ import { AuthGuard } from './guards/auth.guard';
     ReactiveFormsModule,
     HttpClientModule,
     ViewsModule,
-    SharedModule
+    SharedModule,
+    NgxAwesomePopupModule.forRoot(), // Essential, mandatory main module.
+        DialogConfigModule.forRoot(), // Needed for instantiating dynamic components.
+        ConfirmBoxConfigModule.forRoot(), // Needed for instantiating confirm boxes.
+        ToastNotificationConfigModule.forRoot() // Needed for instantiating toast notifications.
   ],
   exports: [
     MaterialModule,
@@ -39,7 +49,9 @@ import { AuthGuard } from './guards/auth.guard';
     BlankComponent,
     FullComponent
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard, 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
