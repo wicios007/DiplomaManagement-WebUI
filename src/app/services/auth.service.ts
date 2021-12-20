@@ -6,9 +6,11 @@ import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
 import { TokenService } from './token.service';
+import { IUser } from '../interfaces/IUser';
 
 
 interface User{
+  id : number;
   email : string;
   firstName : string;
   lastName : string;
@@ -24,6 +26,13 @@ export class AuthService {
   isLogged : Boolean = false
 
   constructor(private http : HttpClient, private token : TokenService, private router : Router) { }
+
+  public httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.token.getToken()}`
+    })
+  }
 
   
   login(data: any){
@@ -64,11 +73,14 @@ export class AuthService {
   }
 
   getUsers(){
-    return this.http.get<User[]>(this.ApiURL + "account/users")
+    return this.http.get<IUser[]>(this.ApiURL + "account/users")
     .pipe(
       tap(),
       catchError(this.handleError("getUsers", []))
     )
+  }
+  getCurrentUser(){
+    return this.http.get<any>(`${this.ApiURL}account/users/current`, this.httpOptions)
   }
 
   isLoggedIn() : Boolean{

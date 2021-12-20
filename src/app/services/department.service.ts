@@ -1,6 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { IDepartmentDto } from '../interfaces/IDepartmentDto';
+import { IDepartmentUpdate } from '../interfaces/IDepartmentUpdate';
+import { AuthService } from './auth.service';
 import { TokenService } from './token.service';
 
 interface Department{
@@ -19,7 +22,7 @@ export class DepartmentService {
 
   ApiURL : string = environment.ApiURL
 
-  constructor(private http: HttpClient, private token : TokenService) { }
+  constructor(private http: HttpClient, private token : TokenService, private auth : AuthService) { }
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -29,19 +32,19 @@ export class DepartmentService {
   }
 
   getAll(){
-    return this.http.get<Department[]>(`${this.ApiURL}department`, this.httpOptions)
+    return this.http.get<IDepartmentDto[]>(`${this.ApiURL}department`, this.auth.httpOptions)
   }
   getById(id : number){
-    return this.http.get<Department>(`${this.ApiURL}department/${id}`, this.httpOptions)
+    return this.http.get<IDepartmentDto>(`${this.ApiURL}department/${id}`, this.auth.httpOptions)
   }
   delete(id : number){
-    return this.http.delete(`${this.ApiURL}department/${id}`, this.httpOptions)
+    return this.http.delete(`${this.ApiURL}department/${id}`, this.auth.httpOptions)
   }
   create(dto : DepartmentDto){
-    return this.http.post(`${this.ApiURL}department`, dto, this.httpOptions) 
+    return this.http.post(`${this.ApiURL}department`, dto, this.auth.httpOptions) 
   }
-  update(id : number, departmentDto : DepartmentDto){
-    return this.http.put((`${this.ApiURL}department/${id}`), departmentDto, this.httpOptions)
+  update(id : number, departmentDto : IDepartmentUpdate){
+    return this.http.put(`${this.ApiURL}department/${id}`, departmentDto, this.auth.httpOptions)
   }
 
 }

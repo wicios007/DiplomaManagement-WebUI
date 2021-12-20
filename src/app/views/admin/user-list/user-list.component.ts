@@ -3,12 +3,8 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/services/auth.service';
+import { IUser } from 'src/app/interfaces/IUser';
 
-interface User{
-  email : string;
-  firstName : string;
-  lastName : string;
-}
 
 @Component({
   selector: 'app-user-list',
@@ -17,14 +13,14 @@ interface User{
 })
 export class UserListComponent implements OnInit, AfterViewInit {
 
-  users : User[]
-  displayedColumns : string[] = ['firstName', 'lastName', 'email']
-  dataSource = new MatTableDataSource<User>()
+  users : IUser[]
+  displayedColumns : string[] = ['id', 'firstName', 'lastName', 'email']
+  dataSource = new MatTableDataSource<IUser>()
   constructor(private auth : AuthService, private liveAnnouncer : LiveAnnouncer) { this.users = [] }
 
   ngOnInit(): void {
 
-    this.auth.getUsers().subscribe((data : User[]) => {
+    this.auth.getUsers().subscribe((data : IUser[]) => {
       this.dataSource = new MatTableDataSource(data)
       this.dataSource.sort = this.sort
       this.users = data

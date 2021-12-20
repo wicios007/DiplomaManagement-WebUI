@@ -15,8 +15,14 @@ import { UserListComponent } from './admin/user-list/user-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StudentNavbarComponent } from './student/student-navbar/student-navbar.component';
 import { PromoterNavbarComponent } from './promoter/promoter-navbar/promoter-navbar.component';
-import { AddThesisComponent } from './student/add-thesis/add-thesis.component';
-import { ThesisListComponent } from './student/thesis-list/thesis-list.component';
+import { ThesisComponent } from './student/thesis/thesis.component';
+import { ProposedThesisComponent } from './student/proposed-thesis/proposed-thesis.component';
+import { AddProposedThesisComponent } from './student/proposed-thesis/add-proposed-thesis/add-proposed-thesis.component';
+import { ShowProposedThesisComponent } from './student/proposed-thesis/show-proposed-thesis/show-proposed-thesis.component';
+import { ShowThesisComponent } from './student/thesis/show-thesis/show-thesis.component';
+import { StudentPropThesisNavMenuComponent } from './student/proposed-thesis/student-prop-thesis-nav-menu/student-prop-thesis-nav-menu.component';
+import { DetailsProposedThesisComponent } from './student/proposed-thesis/details-proposed-thesis/details-proposed-thesis.component';
+import { DetailsCommentsProposedThesisComponent } from './student/proposed-thesis/details-comments-proposed-thesis/details-comments-proposed-thesis.component';
 
 
 
@@ -31,8 +37,14 @@ import { ThesisListComponent } from './student/thesis-list/thesis-list.component
     UserListComponent,
     StudentNavbarComponent,
     PromoterNavbarComponent,
-    AddThesisComponent,
-    ThesisListComponent
+    ThesisComponent,
+    ProposedThesisComponent,
+    AddProposedThesisComponent,
+    ShowProposedThesisComponent,
+    ShowThesisComponent,
+    StudentPropThesisNavMenuComponent,
+    DetailsProposedThesisComponent,
+    DetailsCommentsProposedThesisComponent
   ],
   imports: [
     CommonModule,
