@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IProposedThesisDto } from 'src/app/interfaces/IProposedThesisDto';
+import { IUser } from 'src/app/interfaces/IUser';
+import { AuthService } from 'src/app/services/auth.service';
+import { ProposedThesisService } from 'src/app/services/proposed-thesis.service';
 
 @Component({
   selector: 'app-details-proposed-thesis',
@@ -7,9 +12,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsProposedThesisComponent implements OnInit {
 
-  constructor() { }
+  these : IProposedThesisDto = {id:0, studentId:0, createdById:0, name:"", nameEnglish:"", description:""}
+  user : IUser = {id: 0, email:"", firstName:"", lastName:"", departmentId:0}
+  thesisId : number
+  showComments : boolean
+  showCommentsBtnText : string
 
-  ngOnInit(): void {
+  @Output()
+  thesisIdEvent: EventEmitter<number> = new EventEmitter();
+
+  constructor(private router : Router, private activatedRoute : ActivatedRoute, private propTheses : ProposedThesisService, private auth : AuthService) {
+    this.showComments = false
+    this.showCommentsBtnText = "Pokaż komentarze"
+    this.thesisId = 0
+    this.activatedRoute.params.subscribe(res => {
+      console.log(res.id)
+      this.thesisId = res.id
+    })
   }
 
+  ngOnInit(): void {
+    this.auth.getCurrentUser().subscribe(data => {
+      this.user = data
+      console.log(this.user)
+    },
+      err => { console.error(err) },
+      () => {
+        this.propTheses.getById(this.user.departmentId, this.thesisId).subscribe((data: IProposedThesisDto) => {
+          console.log(data)
+          this.these = data;
+        })
+      }
+    )
+  }
+
+  toggleComments(){
+    this.showComments = !this.showComments
+    this.showComments ? this.showCommentsBtnText = "Ukryj komentarze" : this.showCommentsBtnText = "Pokaż komentarze"
+    this.thesisIdEvent.emit(this.thesisId) 
+    console.log(this.thesisId)
+  }
+
+  emitId(id: number){
+    this.thesisIdEvent.emit(id)
+  }
 }

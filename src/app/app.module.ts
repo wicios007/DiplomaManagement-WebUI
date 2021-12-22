@@ -42,6 +42,8 @@ import {
         DialogConfigModule.forRoot(), // Needed for instantiating dynamic components.
         ConfirmBoxConfigModule.forRoot(), // Needed for instantiating confirm boxes.
         ToastNotificationConfigModule.forRoot() // Needed for instantiating toast notifications.
+
+
   ],
   exports: [
     MaterialModule,

@@ -6,6 +6,7 @@ import { RegisterComponent } from './admin/register/register.component';
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { PromoterComponent } from './promoter/promoter.component';
 import { AddProposedThesisComponent } from './student/proposed-thesis/add-proposed-thesis/add-proposed-thesis.component';
+import { DetailsProposedThesisComponent } from './student/proposed-thesis/details-proposed-thesis/details-proposed-thesis.component';
 import { ProposedThesisComponent } from './student/proposed-thesis/proposed-thesis.component';
 import { ShowProposedThesisComponent } from './student/proposed-thesis/show-proposed-thesis/show-proposed-thesis.component';
 import { StudentComponent } from './student/student.component';
@@ -80,6 +81,14 @@ const routes: Routes = [
         },
         path: 'student/proposed-thesis/show',
         component: ShowProposedThesisComponent
+      },
+      {
+        canActivate: [AuthGuard],
+        data : {
+          role: ['Admin', 'Student']
+        },
+        path: 'student/proposed-thesis/show/:id',
+        component: DetailsProposedThesisComponent
       },
       {
         canActivate: [AuthGuard],

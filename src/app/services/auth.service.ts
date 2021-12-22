@@ -53,14 +53,14 @@ export class AuthService {
 
   register(data : any){
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token.getToken()}`
-      })
-    }
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/json',
+    //     Authorization: `Bearer ${this.token.getToken()}`
+    //   })
+    // }
     
-    return this.http.post<any>(this.ApiURL + 'account/register', data, httpOptions)
+    return this.http.post<any>(this.ApiURL + 'account/register', data, this.httpOptions)
     .pipe(
       catchError((err) => {
         console.log('err service')
@@ -79,6 +79,15 @@ export class AuthService {
       catchError(this.handleError("getUsers", []))
     )
   }
+
+  getUserById(id : number){
+    return this.http.get<IUser>(`${this.ApiURL}account/users/${id}`)
+    .pipe(
+      tap(),
+      catchError(this.handleError("getUserById", []))
+    )
+  }
+
   getCurrentUser(){
     return this.http.get<any>(`${this.ApiURL}account/users/current`, this.httpOptions)
   }
@@ -104,7 +113,6 @@ export class AuthService {
 
   getRole() : string | undefined{
     const role = sessionStorage.getItem('role')
-
     return role?.toString()
   }
 
