@@ -9,6 +9,7 @@ import { AddProposedThesisComponent } from './student/proposed-thesis/add-propos
 import { DetailsProposedThesisComponent } from './student/proposed-thesis/details-proposed-thesis/details-proposed-thesis.component';
 import { ProposedThesisComponent } from './student/proposed-thesis/proposed-thesis.component';
 import { ShowProposedThesisComponent } from './student/proposed-thesis/show-proposed-thesis/show-proposed-thesis.component';
+import { SendEmailComponent } from './student/send-email/send-email.component';
 import { StudentComponent } from './student/student.component';
 import { ThesisComponent } from './student/thesis/thesis.component';
 
@@ -97,6 +98,14 @@ const routes: Routes = [
         },
         path: 'student/proposed-thesis/add',
         component: AddProposedThesisComponent
+      },
+      {
+        canActivate: [AuthGuard],
+        data : {
+          role: ['Admin', 'Student']
+        },
+        path: 'student/send-email',
+        component: SendEmailComponent
       },
       {
         path: '**',

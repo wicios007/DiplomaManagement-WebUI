@@ -23,6 +23,8 @@ import { ShowThesisComponent } from './student/thesis/show-thesis/show-thesis.co
 import { StudentPropThesisNavMenuComponent } from './student/proposed-thesis/student-prop-thesis-nav-menu/student-prop-thesis-nav-menu.component';
 import { DetailsProposedThesisComponent } from './student/proposed-thesis/details-proposed-thesis/details-proposed-thesis.component';
 import { DetailsCommentsProposedThesisComponent } from './student/proposed-thesis/details-comments-proposed-thesis/details-comments-proposed-thesis.component';
+import { DetailsCommentProposedThesisAddComponent } from './student/proposed-thesis/details-comment-proposed-thesis-add/details-comment-proposed-thesis-add.component';
+import { SendEmailComponent } from './student/send-email/send-email.component';
 
 
 
@@ -44,7 +46,9 @@ import { DetailsCommentsProposedThesisComponent } from './student/proposed-thesi
     ShowThesisComponent,
     StudentPropThesisNavMenuComponent,
     DetailsProposedThesisComponent,
-    DetailsCommentsProposedThesisComponent
+    DetailsCommentsProposedThesisComponent,
+    DetailsCommentProposedThesisAddComponent,
+    SendEmailComponent
   ],
   imports: [
     CommonModule,

@@ -89,7 +89,7 @@ export class AuthService {
   }
 
   getCurrentUser(){
-    return this.http.get<any>(`${this.ApiURL}account/users/current`, this.httpOptions)
+    return this.http.get<IUser>(`${this.ApiURL}account/users/current`, this.httpOptions)
   }
 
   isLoggedIn() : Boolean{

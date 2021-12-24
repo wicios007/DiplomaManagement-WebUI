@@ -16,6 +16,7 @@ export class DetailsCommentsProposedThesisComponent implements OnInit {
   comments : ICommentDto[] = [];
   user! : IUser
   users : IUser[] = []
+  addCommentShow : boolean = false
 
   thesisId : number = 0
 
@@ -55,5 +56,9 @@ export class DetailsCommentsProposedThesisComponent implements OnInit {
     const firstName = this.users.find(c => c.id == id)?.firstName
     const lastName = this.users.find(c => c.id == id)?.lastName
       return `${firstName} ${lastName}`
+  }
+
+  showAddCommentBtn(){
+    this.addCommentShow = !this.addCommentShow
   }
 }
