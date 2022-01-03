@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { empty } from 'rxjs';
 import { IProposedThesisDto } from 'src/app/interfaces/IProposedThesisDto';
+import { IProposedThesisUpdateDto } from 'src/app/interfaces/IProposedThesisUpdateDto';
 import { IUser } from 'src/app/interfaces/IUser';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProposedThesisService } from 'src/app/services/proposed-thesis.service';
@@ -24,25 +25,34 @@ export class ShowProposedThesisComponent implements OnInit {
   dataSource = new MatTableDataSource<IProposedThesisDto>()
   constructor(private auth: AuthService, private propTheses: ProposedThesisService, private liveAnnouncer: LiveAnnouncer, private router : Router, private toast : ToastService) {
     this.theses = []
+    this.user = this.auth.currentUser
 
   }
 
   ngOnInit(): void {
-    this.auth.getCurrentUser().subscribe(data => {
-      this.user = data
-      console.log(this.user)
-    },
-      err => { console.error(err) },
-      () => {
-        this.propTheses.getAllByStudent(this.user.departmentId, this.user.id).subscribe((data: IProposedThesisDto[]) => {
-          console.log(data)
-          this.dataSource = new MatTableDataSource(data)
-          this.dataSource.sort = this.sort
-          this.theses = data
-          console.log(data)
-        })
-      }
-    )
+    // this.user = this.auth.user
+    this.propTheses.getAllByStudent(this.user.departmentId, this.user.id).subscribe((data : IProposedThesisDto[]) => {
+        console.log(data)
+        this.dataSource = new MatTableDataSource(data)
+        this.dataSource.sort = this.sort
+        this.theses = data
+        console.log(data)
+    })
+    // this.auth.getCurrentUser().subscribe(data => {
+    //   this.user = data
+    //   console.log(this.user)
+    // },
+    //   err => { console.error(err) },
+    //   () => {
+    //     this.propTheses.getAllByStudent(this.user.departmentId, this.user.id).subscribe((data: IProposedThesisDto[]) => {
+    //       console.log(data)
+    //       this.dataSource = new MatTableDataSource(data)
+    //       this.dataSource.sort = this.sort
+    //       this.theses = data
+    //       console.log(data)
+    //     })
+    //   }
+    // )
   }
   @ViewChild(MatSort) sort!: MatSort;
   ngAfterViewInit() {

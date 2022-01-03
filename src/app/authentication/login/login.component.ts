@@ -50,6 +50,10 @@ export class LoginComponent implements OnInit {
       }, (err : any) => {
         console.log(err.error)
         this.errorString = err.error
+      }, () => {
+        this.auth.getCurrentUser().subscribe(data => {
+          this.auth.currentUser = data
+        })
       })
       
   }

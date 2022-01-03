@@ -1,6 +1,6 @@
 <app-student-navbar></app-student-navbar>
 <div class="container">
-    <table mat-table [dataSource]="theses" matSort (matSortChange)="announceSortChange($event)"
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
         class="mat-elevation-z8" style="width: 100%">
 
         <ng-container matColumnDef="id">
@@ -33,9 +33,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="redirectTo(row.id)" ></tr>
     </table> 
-    <!-- [routerLink] ="['dashboards/student/proposed-thesis/show', row.id]" -->
-    <!-- (click)="redirectTo(row.id)" -->
+    <!-- [routerLink] ="['dashboards/student/proposed-thesis/show', row.id]"
+    (click)="redirectTo(row.id)" -->
 </div>
-<!-- <router-outlet>
-
-</router-outlet> -->

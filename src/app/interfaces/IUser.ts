@@ -4,4 +4,6 @@ export interface IUser{
     firstName : string;
     lastName : string;
     departmentId : number;
+    indexNumber? : string
+    title? : string
 }

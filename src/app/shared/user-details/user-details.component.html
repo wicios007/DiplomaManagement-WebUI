@@ -1,0 +1,16 @@
+<div class="container mt-5 md-3">
+    <mat-card id="user-card">
+        <mat-card-title class="text-center">
+            Detale użytkownika
+        </mat-card-title>
+        <mat-card-content>
+            <h3>Id:{{user.id}}</h3>
+            <h3>Personalia: {{user.title}} {{user.firstName}} {{user.lastName}}</h3>
+            <h3>Email: <a href="mailto:{{user.email}}">{{user.email}}</a></h3>
+        </mat-card-content>
+        <mat-card-actions>
+            <button class="btn btn-primary" (click)="showSendEmail()">Wyślij email</button>
+        </mat-card-actions>
+    </mat-card>
+    <app-send-email [destUser]="user" *ngIf="this.showSendEmailComponent"></app-send-email>
+</div>

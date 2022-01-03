@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IUser } from 'src/app/interfaces/IUser';
 import { AuthService } from 'src/app/services/auth.service';
@@ -6,20 +6,19 @@ import { EmailSenderService } from 'src/app/services/email-sender.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
-  selector: 'app-send-email-student',
+  selector: 'app-send-email',
   templateUrl: './send-email.component.html',
   styleUrls: ['./send-email.component.css']
 })
 export class SendEmailComponent implements OnInit {
 
   form : FormGroup
-  users : IUser[]
   user! : IUser
+  public userIdProp : number = -1
+  @Input() public destUser : IUser
 
-  constructor(private fb : FormBuilder, private auth : AuthService, private email : EmailSenderService, private toast : ToastService) { 
-    this.users = []
+  constructor(private fb : FormBuilder, public auth : AuthService, private email : EmailSenderService, private toast : ToastService) { 
     this.form = this.fb.group({})
-
    }
 
   ngOnInit(): void {
@@ -27,20 +26,13 @@ export class SendEmailComponent implements OnInit {
       this.user = data
     }, (err) => {
       console.error(err)
-    }, () => {
-      this.auth.getUsersByRole(1).subscribe(data => {
-        this.users = data;
-      }, err => {
-        console.error(err)
-      }, () => {
-        this.createForm()
-      })
     })
+    this.createForm()
   }
 
   createForm(){
     this.form = this.fb.group({
-      destId : [],
+      destId : [this.destUser.id],
       subject : [null, Validators.compose([Validators.required])],
       content : [null, Validators.compose([Validators.required])]
     })
@@ -60,10 +52,6 @@ export class SendEmailComponent implements OnInit {
     })
   }
 
-  getFullName(id : number){
-    const firstName = this.users.find(c => c.id == id)?.firstName
-    const lastName = this.users.find(c => c.id == id)?.lastName
-    return `${firstName} ${lastName}`
-  }
+
 
 }

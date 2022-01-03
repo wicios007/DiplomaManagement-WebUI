@@ -1,1 +1,36 @@
-<p>show-thesis works!</p>
+<!-- <div class="container">
+    <div class="mat-card">
+        <div class="mat-card-title text-center">
+            <h1>Praca dyplomowa</h1>
+        </div>
+        <div class="mat-card-content">
+            <div *ngIf="!isThesisExist">Brak zaakceptowanej pracy dyplomowej</div>
+            <div *ngIf="isThesisExist">
+                Nazwa{{thesis.name}}
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="container">
+    <div class="mat card" style="padding-left: 10px" *ngIf="thesis==undefined">
+        <div class="mat-card-title text-center">
+            Brak zaakceptowanej pracy dyplomowej
+        </div>
+    </div>
+    <div class="mat-card" style="padding-left: 10px" *ngIf="isThesisExist">
+        <div class="mat-card-title">
+            <h1>Tytuł: <b>{{thesis.name}}</b></h1>
+        </div>
+        <div class="mat-card-content">
+            <div class="row">
+                <h2>Tytuł po angielsku: <b>{{thesis.nameEnglish}}</b></h2>
+            </div>
+            <div class="row">
+                <h2>Promotor: <b><a routerLink='../../user-details/{{promoter.id}}'>{{promoter.firstName}} {{promoter.lastName}}</a></b></h2>
+            </div>
+            <div class="row">
+                <h3>Opis: <em>{{thesis.description}}</em></h3>
+            </div>
+        </div>
+    </div>
+</div>

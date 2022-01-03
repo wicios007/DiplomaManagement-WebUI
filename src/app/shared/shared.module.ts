@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { SpinnerComponent } from './spinner.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { MaterialModule } from '../material.module';
+import { SendEmailComponent } from './send-email/send-email.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -10,15 +14,20 @@ import { SpinnerComponent } from './spinner.component';
   declarations: [
     FooterComponent, 
     HeaderComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    UserDetailsComponent,
+    SendEmailComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule,
+    ReactiveFormsModule
   ],
   exports:[
     FooterComponent,
     HeaderComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    UserDetailsComponent
   ]
 })
 export class SharedModule { }

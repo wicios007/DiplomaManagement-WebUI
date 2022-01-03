@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, first, last, tap } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
@@ -9,11 +9,25 @@ import { TokenService } from './token.service';
 import { IUser } from '../interfaces/IUser';
 
 
+
 interface User{
   id : number;
   email : string;
   firstName : string;
   lastName : string;
+}
+
+class User{
+  public Id : number
+  public Email : string
+  public FirstName : string
+  public LastName : string
+  constructor(id : number, email : string, firstName : string, lastName : string) {
+    this.Id = id;
+    this.Email = email
+    this.FirstName = firstName
+    this.LastName = lastName     
+  }
 }
 
 @Injectable({
@@ -25,7 +39,15 @@ export class AuthService {
 
   isLogged : Boolean = false
 
-  constructor(private http : HttpClient, private token : TokenService, private router : Router) { }
+  public currentUser : IUser
+
+  constructor(private http : HttpClient, private token : TokenService, private router : Router) {
+    // this.currentUser = {id: 0, departmentId: 0, firstName: "", lastName: "", email: ""}
+
+    this.getCurrentUser().subscribe(data => {
+      this.currentUser = data
+    })
+   }
 
   public httpOptions = {
     headers: new HttpHeaders({
@@ -52,13 +74,6 @@ export class AuthService {
   }
 
   register(data : any){
-
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type': 'application/json',
-    //     Authorization: `Bearer ${this.token.getToken()}`
-    //   })
-    // }
     
     return this.http.post<any>(this.ApiURL + 'account/register', data, this.httpOptions)
     .pipe(
@@ -67,8 +82,6 @@ export class AuthService {
         //console.error(err)
         return throwError(err)
       })
-      //tap(),
-      //catchError(this.handleError("register", []))
     )
   }
 
@@ -79,17 +92,47 @@ export class AuthService {
       catchError(this.handleError("getUsers", []))
     )
   }
+  /*
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.token.getToken()}`
+      }),
+      params: new HttpParams({
+        fromObject : {
+          roleValue : role
+        }
+      }))
+  */
 
-  getUserById(id : number){
-    return this.http.get<IUser>(`${this.ApiURL}account/users/${id}`)
+  getUsersByRole(role : number) : Observable<IUser[]>{
+    return this.http.get<IUser[]>(`${this.ApiURL}account/usersByRole`,{
+      headers : new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.token.getToken()}`
+      }),
+      params : new HttpParams({
+        fromObject : {
+          roleValue : role
+        }
+      })
+    })
     .pipe(
       tap(),
-      catchError(this.handleError("getUserById", []))
+      catchError(this.handleError("getUsersByRole", []))
     )
   }
 
+  getUserById(id : number){
+    return this.http.get<IUser>(`${this.ApiURL}account/users/${id}`)
+  }
+
+  // getCurrentUser(){
+  //   return this.http.get<IUser>(`${this.ApiURL}account/users/current`, this.httpOptions)
+  // }
   getCurrentUser(){
-    return this.http.get<IUser>(`${this.ApiURL}account/users/current`, this.httpOptions)
+    console.log(this.currentUser)
+    return this.currentUser ? of(this.currentUser) : this.http.get<IUser>(`${this.ApiURL}account/users/current`, this.httpOptions)
   }
 
   isLoggedIn() : Boolean{
@@ -116,6 +159,19 @@ export class AuthService {
     return role?.toString()
   }
 
+  // getFullName(id : number) : string{
+  //   const userHttp = this.http.get<IUser>(`${this.ApiURL}account/users/${id}`, this.httpOptions)
+  //   var user : IUser = {id: 0, firstName: "", lastName: "", departmentId: 0, email: ""}
+  //   var firstName = ""
+  //   var lastName = ""
+  //   userHttp.subscribe(data => {
+  //     user = data
+  //     firstName = user.firstName
+  //     lastName = user.lastName
+  //     return `${firstName} ${lastName}`
+  //   })
+  //   return `${firstName} ${lastName}`
+  // }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -127,5 +183,7 @@ export class AuthService {
       return of(result as T);
     };
   }
+
+  
 
 }

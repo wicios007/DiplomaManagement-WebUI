@@ -1,0 +1,32 @@
+<div class="container mt-5 md-3">
+    <mat-card id="email-card">
+        <mat-card-title class="text-center">
+            Wyślij email do użytkownika {{destUser.firstName}} {{destUser.lastName}}
+        </mat-card-title>
+        <mat-card-content>
+            <form class="d-flex flex-column" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <div>
+                    <mat-form-field class="input-full-width" appearance="fill">
+                        <mat-label>Temat</mat-label>
+                        <input matInput type="text" [formControl]="$any(form).controls['subject']">
+                        <mat-error
+                            *ngIf="$any(form).controls['subject'].hasError('required') && $any(form).controls['subject'].touched"
+                            class="text-danger support-text">Temat jest wymagany</mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="input-full-width" appearance="fill">
+                        <mat-label>Treść</mat-label>
+                        <textarea matInput type="text" [formControl]="$any(form).controls['content']"></textarea>
+                        <mat-error
+                            *ngIf="$any(form).controls['content'].hasError('required') && $any(form).controls['content'].touched"
+                            class="text-danger support-text">Treść jest wymagana</mat-error>
+                    </mat-form-field>
+                </div>
+                <button mat-raised-button color="primary" class="btn-block" type="submit"
+                    [disabled]="!$any(form).valid">Wyślij email</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

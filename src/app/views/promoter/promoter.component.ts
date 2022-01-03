@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-promoter',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PromoterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth : AuthService) { }
 
   ngOnInit(): void {
+    //console.log("currentUser is" + this.auth.currentUser)
   }
 
 }
