@@ -7,12 +7,16 @@ import { PromoterNavbarComponent } from "./promoter-navbar/promoter-navbar.compo
 import { PromoterRoutingModule } from "./promoter-routing.module";
 import { PromoterComponent } from "./promoter.component";
 import { ShowStudentsComponent } from "./show-students/show-students.component";
+import { ShowPromoterThesesComponent } from './show-promoter-theses/show-promoter-theses.component';
+import { ShowThesisDetailsComponent } from './show-thesis-details/show-thesis-details.component';
 
 @NgModule({
   declarations: [
     PromoterComponent,
     PromoterNavbarComponent,
     ShowStudentsComponent,
+    ShowPromoterThesesComponent,
+    ShowThesisDetailsComponent,
   ],
   imports: [
     CommonModule,

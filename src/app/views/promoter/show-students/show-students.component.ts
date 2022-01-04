@@ -17,7 +17,9 @@ export class ShowStudentsComponent implements OnInit {
   displayedColumns : string[] = ['firstName', 'lastName', 'email']
   //dataSource = new MatTableDataSource<IUser>()
   dataSource : MatTableDataSource<IUser> = new MatTableDataSource<IUser>()
-  constructor(private auth : AuthService, private router : Router, private liveAnnouncer : LiveAnnouncer, private toast : ToastService) { this.users = [] }
+  constructor(private auth : AuthService, private router : Router, private liveAnnouncer : LiveAnnouncer, private toast : ToastService) { 
+    this.users = [] 
+  }
 
 
   ngOnInit(): void {

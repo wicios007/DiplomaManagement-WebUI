@@ -11,7 +11,13 @@ export class StudentComponent implements OnInit {
   constructor(private auth : AuthService) { }
 
   ngOnInit(): void {
-    this.auth.getCurrentUser().subscribe(data => this.auth.currentUser = data)
+  //   this.auth.getCurrentUser().subscribe(data => {
+  //     this.auth.currentUser = data
+  //     localStorage.setItem("currentUserJSON", JSON.stringify(data))
+  //   }, err => {
+  //     console.error("error getting current user") 
+  //   console.error(err)
+  // })
   }
 
 }

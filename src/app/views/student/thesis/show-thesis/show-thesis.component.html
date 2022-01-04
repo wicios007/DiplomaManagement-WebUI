@@ -12,9 +12,10 @@
     </div>
 </div> -->
 <div class="container">
-    <div class="mat card" style="padding-left: 10px" *ngIf="thesis==undefined">
+    <div class="mat card" style="padding-left: 10px" *ngIf="!isThesisExist">
         <div class="mat-card-title text-center">
-            Brak zaakceptowanej pracy dyplomowej
+            <h1>Brak zaakceptowanej pracy dyplomowej</h1>
+            <h3>Promotor musi zaakceptować pracę dyplomową</h3>
         </div>
     </div>
     <div class="mat-card" style="padding-left: 10px" *ngIf="isThesisExist">
@@ -32,5 +33,9 @@
                 <h3>Opis: <em>{{thesis.description}}</em></h3>
             </div>
         </div>
+        <div class="mat-card-actions">
+            <button class="btn btn-primary" (click)="toggleHistoryComments()">Pokaż komentarze do pracy</button>
+        </div>
     </div>
+    <app-details-comments-proposed-thesis [thesisIdEvent]="thesis.id" *ngIf="historyCommentsShow"></app-details-comments-proposed-thesis>
 </div>

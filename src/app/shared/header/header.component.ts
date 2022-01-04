@@ -11,12 +11,15 @@ export class HeaderComponent implements OnInit {
 
   role : String | undefined = ""
   loggedUser : String | undefined = ""
+  public userId : Number | undefined = 0
 
   constructor(private auth : AuthService, private router : Router) { }
 
   ngOnInit(): void {
     this.role = sessionStorage.getItem('role')?.toString()
     this.loggedUser = localStorage.getItem('currentUser')?.toString()
+    const id = localStorage.getItem('userId')?.toString()
+    this.userId = Number(id)
   }
 
   logout(){

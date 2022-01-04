@@ -1,8 +1,12 @@
 <app-student-navbar></app-student-navbar>
 <div class="container">
+    <button class="btn btn-primary" routerLink="..">Powrót do listy</button>
+    <button class="btn btn-primary" (click) = "toggleComments()">{{showCommentsBtnText}}</button>
     <div class="mat-card" style="padding-left: 10px">
         <div class="mat-card-title">
-            <h1>Tytuł: <b>{{these.name}}</b></h1>
+            <div>
+                <h1>Tytuł: <b>{{these.name}}</b></h1>
+            </div>
         </div>
         <div class="mat-card-content">
             <div class="row">
@@ -13,10 +17,10 @@
             </div>
         </div>
         <div class="mat-card-actions">
-            <button class="btn btn-primary" (click) = "toggleComments()">{{showCommentsBtnText}}</button>
+            <!-- <app-details-comments-proposed-thesis (thesisId)="these.id" *ngIf="this.showComments"></app-details-comments-proposed-thesis> -->
         </div>
     </div>
     <div>
-        <app-details-comments-proposed-thesis *ngIf="this.showComments"></app-details-comments-proposed-thesis>
+        <app-details-comments-proposed-thesis [thesisIdEvent]="these.id" *ngIf="this.showComments"></app-details-comments-proposed-thesis>
     </div>
 </div>

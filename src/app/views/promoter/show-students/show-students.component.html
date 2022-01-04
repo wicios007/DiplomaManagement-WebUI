@@ -8,7 +8,6 @@
         </mat-form-field>
         <table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc" (matSortChange)="announceSortChange($event)"
             class="mat-elevation-z8">
-
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
                     Id

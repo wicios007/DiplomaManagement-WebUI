@@ -7,6 +7,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { MaterialModule } from '../material.module';
 import { SendEmailComponent } from './send-email/send-email.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   exports:[
     FooterComponent,

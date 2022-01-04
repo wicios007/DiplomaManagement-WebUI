@@ -16,11 +16,8 @@ export class AddProposedThesisComponent implements OnInit {
   private user!: IUser;
   constructor(private fb : FormBuilder, private router : Router, private propThesisService : ProposedThesisService, private auth : AuthService, private toast : ToastService) { 
     this.form = this.fb.group({})
-    // this.user = null 
-    this.auth.getCurrentUser().subscribe(data => {
-      this.user = data
-      console.log(this.user)
-    });
+    this.auth.currentUser = JSON.parse(localStorage.getItem('user')!)
+    this.user = this.auth.currentUser
   }
 
   ngOnInit(): void {

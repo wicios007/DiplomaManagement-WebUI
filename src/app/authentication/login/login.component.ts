@@ -32,6 +32,15 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('token', res.access_token);
           sessionStorage.setItem('role', res.user_role),
           sessionStorage.setItem('valid_to', res.expires_in)
+          localStorage.setItem('token', res.access_token)
+          localStorage.setItem('role', res.user_role),
+          localStorage.setItem('valid_to', res.expires_in)
+          localStorage.setItem('userId', res.id)
+
+        this.auth.getCurrentUserWithToken(res.access_token).subscribe(data => {
+          this.auth.currentUser = data
+          localStorage.setItem('user', JSON.stringify(data))
+        })
 
           switch (res.user_role) {
             case "Admin":
@@ -45,15 +54,15 @@ export class LoginComponent implements OnInit {
               break
           }
         } else {
-          //console.error("ERROR")
+          console.error("user_role is undefined/null")
         }
       }, (err : any) => {
         console.log(err.error)
         this.errorString = err.error
       }, () => {
-        this.auth.getCurrentUser().subscribe(data => {
-          this.auth.currentUser = data
-        })
+        // this.auth.getCurrentUser().subscribe(data => {
+        //   this.auth.currentUser = data
+        // })
       })
       
   }

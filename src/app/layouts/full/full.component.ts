@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-full',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FullComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth : AuthService) {
+    this.auth.currentUser = JSON.parse(localStorage.getItem('user')!)
+   }
 
   ngOnInit(): void {
+    //this.auth.getCurrentUser().subscribe(data => this.auth.currentUser = data)
+    // this.auth.currentUser = JSON.parse(localStorage.getItem("currentUserJSON")!)
   }
 
 }

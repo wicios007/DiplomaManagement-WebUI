@@ -15,7 +15,6 @@ import { ToastService } from 'src/app/services/toast.service';
 export class ShowPromotersComponent implements OnInit {
   users: IUser[]
   displayedColumns: string[] = ['firstName', 'lastName', 'email']
-  //dataSource = new MatTableDataSource<IUser>()
   dataSource: MatTableDataSource<IUser> = new MatTableDataSource<IUser>()
   constructor(private auth: AuthService,
     private liveAnnouncer: LiveAnnouncer,
@@ -23,8 +22,6 @@ export class ShowPromotersComponent implements OnInit {
     private router: Router) {
     this.users = []
   }
-
-
 
   ngOnInit(): void {
 
@@ -41,7 +38,6 @@ export class ShowPromotersComponent implements OnInit {
   // ngAfterViewInit(){
   //   this.dataSource.sort = this.sort
   // }
-
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -64,7 +60,7 @@ export class ShowPromotersComponent implements OnInit {
       this.router.navigate([`dashboards/user-details`, id], { state: data })
     },
       err => {
-        this.toast.errorToast("Error", "Błąd podczas pobierania proponowanego tematu")
+        this.toast.errorToast("Error", "Błąd podczas pobierania detali użytkownika")
       })
   }
 

@@ -38,7 +38,10 @@ export class ThesisService {
   delete(departmentId : number, thesisId : number){
     return this.http.delete(`${this.ApiURL}department/${departmentId}/thesis/${thesisId}`, this.httpOptions)
   }
-  getByUserId(departmentId : number, userId : number){
-    return this.http.get<IThesisDto>(`${this.ApiURL}department/${departmentId}/thesis/user/${userId}`, this.httpOptions)
+  getByUserId(departmentId : number, studentId : number){
+    return this.http.get<IThesisDto>(`${this.ApiURL}department/${departmentId}/thesis/student/${studentId}`, this.httpOptions)
+  }
+  getByPromoterId(departmentId : number, promoterId : number){
+    return this.http.get<IThesisDto[]>(`${this.ApiURL}department/${departmentId}/thesis/promoter/${promoterId}`, this.httpOptions)
   }
 }

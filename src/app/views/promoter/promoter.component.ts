@@ -8,10 +8,23 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class PromoterComponent implements OnInit {
 
-  constructor(private auth : AuthService) { }
+  constructor(private auth : AuthService) {
+    //  this.auth.getCurrentUser().subscribe(data => {
+    //   this.auth.currentUser = data
+    // })
+    this.auth.currentUser = JSON.parse(localStorage.getItem('currentUserJSON')!)
+    console.log("currentUser is" + JSON.stringify(this.auth.currentUser))
+   }
 
   ngOnInit(): void {
-    //console.log("currentUser is" + this.auth.currentUser)
+    // this.auth.getCurrentUser().subscribe(data => {
+    //   this.auth.currentUser = data
+    // })
+    // console.log("currentUser is" + JSON.stringify(this.auth.currentUser))
+  }
+
+  ngOnDestroy(): void{
+    console.log("promoter destroyed")
   }
 
 }

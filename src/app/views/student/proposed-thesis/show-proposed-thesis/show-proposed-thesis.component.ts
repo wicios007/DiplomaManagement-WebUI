@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { empty } from 'rxjs';
+import { empty, Observable } from 'rxjs';
 import { IProposedThesisDto } from 'src/app/interfaces/IProposedThesisDto';
 import { IProposedThesisUpdateDto } from 'src/app/interfaces/IProposedThesisUpdateDto';
 import { IUser } from 'src/app/interfaces/IUser';
@@ -20,18 +20,17 @@ export class ShowProposedThesisComponent implements OnInit {
 
   theses: IProposedThesisDto[]
   these : IProposedThesisDto | undefined
-  user!: IUser
+   user: IUser
   displayedColumns: string[] = ['id', 'name', 'nameEnglish']
   dataSource = new MatTableDataSource<IProposedThesisDto>()
   constructor(private auth: AuthService, private propTheses: ProposedThesisService, private liveAnnouncer: LiveAnnouncer, private router : Router, private toast : ToastService) {
     this.theses = []
+    this.auth.currentUser = JSON.parse(localStorage.getItem('user')!)
     this.user = this.auth.currentUser
-
   }
 
   ngOnInit(): void {
-    // this.user = this.auth.user
-    this.propTheses.getAllByStudent(this.user.departmentId, this.user.id).subscribe((data : IProposedThesisDto[]) => {
+    this.propTheses.getAllByStudent(this.auth.currentUser.departmentId, this.auth.currentUser.id).subscribe((data : IProposedThesisDto[]) => {
         console.log(data)
         this.dataSource = new MatTableDataSource(data)
         this.dataSource.sort = this.sort
@@ -69,7 +68,7 @@ export class ShowProposedThesisComponent implements OnInit {
   }
 
   redirectTo(id : number){
-    this.propTheses.getById(this.user.departmentId, id).subscribe(data => {
+    this.propTheses.getById(this.auth.currentUser.departmentId, id).subscribe(data => {
       console.log(data);
       this.router.navigate([`dashboards/student/proposed-thesis/show/`, id], { state : data })
     },

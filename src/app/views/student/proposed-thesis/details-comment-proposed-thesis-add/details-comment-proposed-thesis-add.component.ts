@@ -14,12 +14,14 @@ import { ToastService } from 'src/app/services/toast.service';
 export class DetailsCommentProposedThesisAddComponent implements OnInit {
 
   public form : FormGroup
-  user! : IUser
+  user : IUser
   thesisId : number = 0
 
   constructor(private fb : FormBuilder, private activatedRoute : ActivatedRoute, private propThesisCommentService : ProposedThesisCommentsService, private auth : AuthService, private toast : ToastService) { 
     this.form = this.fb.group({})
-    auth.getCurrentUser().subscribe(data => this.user = data, err => console.log(`--ERROR-- ${err}`)) 
+    // auth.getCurrentUser().subscribe(data => this.user = data, err => console.log(`--ERROR-- ${err}`)) 
+    this.auth.currentUser = JSON.parse(localStorage.getItem('user')!)
+    this.user = this.auth.currentUser
     this.activatedRoute.params.subscribe(res => {
       this.thesisId = res.id
     })

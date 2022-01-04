@@ -13,7 +13,7 @@ import { ProposedThesisService } from 'src/app/services/proposed-thesis.service'
 export class DetailsProposedThesisComponent implements OnInit {
 
   these : IProposedThesisDto = {id:0, studentId:0, createdById:0, name:"", nameEnglish:"", description:""}
-  user : IUser = {id: 0, email:"", firstName:"", lastName:"", departmentId:0}
+  user : IUser
   thesisId : number
   showComments : boolean
   showCommentsBtnText : string
@@ -25,32 +25,41 @@ export class DetailsProposedThesisComponent implements OnInit {
     this.showComments = false
     this.showCommentsBtnText = "Pokaż komentarze"
     this.thesisId = 0
+    this.auth.currentUser = JSON.parse(localStorage.getItem('user')!)
+    this.user = this.auth.currentUser
+    
     this.activatedRoute.params.subscribe(res => {
       console.log(res.id)
       this.thesisId = res.id
     })
+
+    this.propTheses.getById(this.user.departmentId, this.thesisId).subscribe((data: IProposedThesisDto) => {
+      console.log(data)
+      this.these = data;
+    })
   }
 
   ngOnInit(): void {
-    this.auth.getCurrentUser().subscribe(data => {
-      this.user = data
-      console.log(this.user)
-    },
-      err => { console.error(err) },
-      () => {
-        this.propTheses.getById(this.user.departmentId, this.thesisId).subscribe((data: IProposedThesisDto) => {
-          console.log(data)
-          this.these = data;
-        })
-      }
-    )
+    // this.auth.getCurrentUser().subscribe(data => {
+    //   this.user = data
+    //   console.log(this.user)
+    // },
+    //   err => { console.error(err) },
+    //   () => {
+    //     this.propTheses.getById(this.user.departmentId, this.thesisId).subscribe((data: IProposedThesisDto) => {
+    //       console.log(data)
+    //       this.these = data;
+    //     })
+    //   }
+    // )
   }
 
   toggleComments(){
     this.showComments = !this.showComments
     this.showComments ? this.showCommentsBtnText = "Ukryj komentarze" : this.showCommentsBtnText = "Pokaż komentarze"
     this.thesisIdEvent.emit(this.thesisId) 
-    console.log(this.thesisId)
+    //console.log(this.thesisId)
+    console.log(this.these.id)
   }
 
   emitId(id: number){

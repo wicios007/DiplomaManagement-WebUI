@@ -44,9 +44,9 @@ export class AuthService {
   constructor(private http : HttpClient, private token : TokenService, private router : Router) {
     // this.currentUser = {id: 0, departmentId: 0, firstName: "", lastName: "", email: ""}
 
-    this.getCurrentUser().subscribe(data => {
-      this.currentUser = data
-    })
+    // this.getCurrentUser().subscribe(data => {
+    //   this.currentUser = data
+    // })
    }
 
   public httpOptions = {
@@ -127,13 +127,22 @@ export class AuthService {
     return this.http.get<IUser>(`${this.ApiURL}account/users/${id}`)
   }
 
-  // getCurrentUser(){
-  //   return this.http.get<IUser>(`${this.ApiURL}account/users/current`, this.httpOptions)
-  // }
   getCurrentUser(){
-    console.log(this.currentUser)
-    return this.currentUser ? of(this.currentUser) : this.http.get<IUser>(`${this.ApiURL}account/users/current`, this.httpOptions)
+    return this.http.get<IUser>(`${this.ApiURL}account/users/current`, this.httpOptions)
   }
+
+  getCurrentUserWithToken(token : string){
+    return this.http.get<IUser>(`${this.ApiURL}account/users/current`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization : `Bearer ${token}`
+      })
+    })
+  }
+  // getCurrentUser(){
+  //   console.log(this.currentUser)
+  //   return this.currentUser ? of(this.currentUser) : this.http.get<IUser>(`${this.ApiURL}account/users/current`, this.httpOptions)
+  // }
 
   isLoggedIn() : Boolean{
     let user = localStorage.getItem('currentUser')
@@ -147,9 +156,19 @@ export class AuthService {
   }
 
   logOut(){
-    localStorage.removeItem('currentUser')
     sessionStorage.removeItem('role')
     sessionStorage.removeItem('token')
+    sessionStorage.removeItem('valid_to')
+    localStorage.removeItem('currentUser')
+    localStorage.removeItem('token')
+    localStorage.removeItem('role'),
+    localStorage.removeItem('valid_to')
+    localStorage.removeItem('userId')
+    localStorage.removeItem('currentUserJSON')
+    localStorage.removeItem('currentUserByToken')
+
+    // this.currentUser = undefined
+
     this.isLogged = false
     this.router.navigate([''])
   }

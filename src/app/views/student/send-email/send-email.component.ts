@@ -18,24 +18,35 @@ export class SendEmailComponent implements OnInit {
 
   constructor(private fb : FormBuilder, private auth : AuthService, private email : EmailSenderService, private toast : ToastService) { 
     this.users = []
+    this.auth.currentUser = JSON.parse(localStorage.getItem('user')!)
+    this.user = this.auth.currentUser
     this.form = this.fb.group({})
 
    }
 
   ngOnInit(): void {
-    this.auth.getCurrentUser().subscribe(data => {
-      this.user = data
-    }, (err) => {
+
+    this.auth.getUsersByRole(1).subscribe(data => {
+      this.users = data;
+    }, err => {
       console.error(err)
     }, () => {
-      this.auth.getUsersByRole(1).subscribe(data => {
-        this.users = data;
-      }, err => {
-        console.error(err)
-      }, () => {
-        this.createForm()
-      })
+      this.createForm()
     })
+
+    // this.auth.getCurrentUser().subscribe(data => {
+    //   this.user = data
+    // }, (err) => {
+    //   console.error(err)
+    // }, () => {
+    //   this.auth.getUsersByRole(1).subscribe(data => {
+    //     this.users = data;
+    //   }, err => {
+    //     console.error(err)
+    //   }, () => {
+    //     this.createForm()
+    //   })
+    // })
   }
 
   createForm(){
