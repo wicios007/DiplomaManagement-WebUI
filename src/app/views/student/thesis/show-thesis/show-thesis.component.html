@@ -37,5 +37,5 @@
             <button class="btn btn-primary" (click)="toggleHistoryComments()">Pokaż komentarze do pracy</button>
         </div>
     </div>
-    <app-details-comments-proposed-thesis [thesisIdEvent]="thesis.id" *ngIf="historyCommentsShow"></app-details-comments-proposed-thesis>
+    <app-details-comments-proposed-thesis [thesisIdEvent]="thesis.id" [showCommentsBtn]="false" *ngIf="historyCommentsShow"></app-details-comments-proposed-thesis>
 </div>

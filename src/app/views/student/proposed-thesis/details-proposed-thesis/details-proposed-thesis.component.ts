@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProposedThesisDto } from 'src/app/interfaces/IProposedThesisDto';
 import { IUser } from 'src/app/interfaces/IUser';

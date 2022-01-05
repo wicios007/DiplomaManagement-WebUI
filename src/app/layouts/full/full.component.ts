@@ -13,8 +13,6 @@ export class FullComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    //this.auth.getCurrentUser().subscribe(data => this.auth.currentUser = data)
-    // this.auth.currentUser = JSON.parse(localStorage.getItem("currentUserJSON")!)
   }
 
 }

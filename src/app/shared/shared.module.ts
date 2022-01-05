@@ -8,6 +8,7 @@ import { MaterialModule } from '../material.module';
 import { SendEmailComponent } from './send-email/send-email.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { DepartmentDetailsComponent } from './department-details/department-details.component';
 
 
 
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     SpinnerComponent,
     UserDetailsComponent,
-    SendEmailComponent
+    SendEmailComponent,
+    DepartmentDetailsComponent
   ],
   imports: [
     CommonModule,

@@ -19,6 +19,7 @@ export class DetailsCommentsProposedThesisComponent implements OnInit {
   addCommentShow : boolean = false
 
   @Input() thesisIdEvent : number = 0
+  @Input() showCommentsBtn : boolean = false
 
 
   constructor(private router : Router, private activatedRoute : ActivatedRoute, private propTheses : ProposedThesisService, private propThesesComm : ProposedThesisCommentsService, private auth : AuthService) {

@@ -20,23 +20,13 @@ export class ShowThesisComponent implements OnInit, OnDestroy {
   public historyCommentsBtn : string = ""
 
   @Output() thesisIdEvent : EventEmitter<number> = new EventEmitter<number>()
+  @Output() commentBtnEvent : EventEmitter<boolean> = new EventEmitter<boolean>()
 
 
   constructor(private thesisService : ThesisService, private auth : AuthService) {
     this.historyCommentsShow = false
     this.auth.currentUser = JSON.parse(localStorage.getItem('user')!)
     this.user = this.auth.currentUser
-
-    this.thesisService.getByUserId(this.user.departmentId, this.user.id).subscribe(data => {
-        this.auth.getUserById(data.promoterId).subscribe(data => {
-          this.promoter = data
-        })
-        this.isThesisExist = true
-        this.thesis = data
-      }, err => {
-        this.isThesisExist = false
-      })
-
     // this.auth.getCurrentUser().subscribe(data => {
     //   this.user = data
     // }, err => console.error(err),
@@ -56,6 +46,17 @@ export class ShowThesisComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit(): void {
+
+    this.thesisService.getByUserId(this.user.departmentId, this.user.id).subscribe(data => {
+      this.auth.getUserById(data.promoterId).subscribe(data => {
+        this.promoter = data
+      })
+      this.isThesisExist = true
+      this.thesis = data
+    }, err => {
+      this.isThesisExist = false
+    })
+
     this.auth.getUserById(this.thesis.promoterId).subscribe(data => {
       this.promoter = data
     })
@@ -67,6 +68,7 @@ export class ShowThesisComponent implements OnInit, OnDestroy {
   toggleHistoryComments() {
     this.historyCommentsShow = !this.historyCommentsShow
     this.thesisIdEvent.emit(this.thesis.id)
+    this.commentBtnEvent.emit(false)
   }
 
 }

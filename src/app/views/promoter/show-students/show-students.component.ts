@@ -61,7 +61,7 @@ export class ShowStudentsComponent implements OnInit {
       this.router.navigate([`dashboards/user-details`, id], { state: data })
     },
       err => {
-        this.toast.errorToast("Error", "Błąd podczas pobierania proponowanego tematu")
+        this.toast.errorToast("Error", "Błąd podczas pobierania użytkownika")
       })
   }
 }

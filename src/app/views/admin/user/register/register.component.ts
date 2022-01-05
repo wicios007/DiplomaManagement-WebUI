@@ -3,6 +3,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
+import { IDepartmentDto } from 'src/app/interfaces/IDepartmentDto';
 import { AuthService } from 'src/app/services/auth.service';
 import { DepartmentService } from 'src/app/services/department.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -32,7 +33,7 @@ export class RegisterComponent implements OnInit {
   public errorMessage: String = ""
   public isFetched: boolean = false
 
-  departments: Department[] = []
+  departments: IDepartmentDto[] = []
   roles: Roles[] = [
     { value: 1, viewValue: "Promotor" },
     { value: 2, viewValue: "Student" },

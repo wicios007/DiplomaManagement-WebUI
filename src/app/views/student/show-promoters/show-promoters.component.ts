@@ -13,6 +13,7 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./show-promoters.component.css']
 })
 export class ShowPromotersComponent implements OnInit {
+  user : IUser
   users: IUser[]
   displayedColumns: string[] = ['firstName', 'lastName', 'email']
   dataSource: MatTableDataSource<IUser> = new MatTableDataSource<IUser>()
@@ -21,11 +22,12 @@ export class ShowPromotersComponent implements OnInit {
     private toast: ToastService,
     private router: Router) {
     this.users = []
+    this.user = JSON.parse(localStorage.getItem('user')!)
   }
 
   ngOnInit(): void {
 
-    this.auth.getUsersByRole(1).subscribe((data: IUser[]) => {
+    this.auth.getUsersByRoleAndDepartment(this.user.departmentId, 1).subscribe((data: IUser[]) => {
       this.dataSource = new MatTableDataSource(data)
       this.dataSource.sort = this.sort
       this.users = data

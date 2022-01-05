@@ -1,8 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { IDepartmentDto } from 'src/app/interfaces/IDepartmentDto';
 import { IUser } from 'src/app/interfaces/IUser';
 import { AuthService } from 'src/app/services/auth.service';
+import { DepartmentService } from 'src/app/services/department.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-user-details',
@@ -14,9 +17,10 @@ export class UserDetailsComponent implements OnInit {
   @Input() userId : number
   user! : IUser
   showSendEmailComponent : boolean = false
+  departmentDto! : IDepartmentDto
 
   
-  constructor(private auth : AuthService, private activatedRoute : ActivatedRoute) { 
+  constructor(private auth : AuthService, private activatedRoute : ActivatedRoute, private toast : ToastService, private department : DepartmentService) { 
     this.userId = 0
     this.activatedRoute.params.subscribe(res => {
       console.log(res.id)
@@ -27,7 +31,14 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit(): void {
      this.auth.getUserById(this.userId).subscribe(data => {
        this.user = data
-     })
+     }, err => {
+       this.toast.errorToast("Błąd", "Błąd podczas pobierania użytkownika")
+     }, () => {
+       this.department.getById(this.user.departmentId).subscribe(data => {
+         this.departmentDto = data
+       })
+     }
+     )
   }
 
   showSendEmail(){

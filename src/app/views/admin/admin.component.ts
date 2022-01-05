@@ -9,13 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AdminComponent implements OnInit {
 
   constructor(private auth : AuthService) {
-    this.auth.getCurrentUser().subscribe(data => {
-      this.auth.currentUser = data
-    }, (err) => {
-      console.error(err)
-    }, () => {
-      this.auth.currentUser = JSON.parse(localStorage.getItem("currentUserJSON")!)
-    })
+    this.auth.currentUser = JSON.parse(localStorage.getItem('user')!)
    }
 
   ngOnInit(): void {

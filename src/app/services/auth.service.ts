@@ -123,6 +123,24 @@ export class AuthService {
     )
   }
 
+  getUsersByRoleAndDepartment(departmentId : number, role : number){
+    return this.http.get<IUser[]>(`${this.ApiURL}account/users/department/${departmentId}`,{
+      headers : new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.token.getToken()}`
+      }),
+      params : new HttpParams({
+        fromObject : {
+          roleValue : role
+        }
+      })
+    })
+    .pipe(
+      tap(),
+      catchError(this.handleError("getUsersByRole", []))
+    )
+  }
+
   getUserById(id : number){
     return this.http.get<IUser>(`${this.ApiURL}account/users/${id}`)
   }

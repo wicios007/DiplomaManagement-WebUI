@@ -4,6 +4,7 @@ import { IUser } from 'src/app/interfaces/IUser';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmailSenderService } from 'src/app/services/email-sender.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-send-email',
@@ -17,12 +18,12 @@ export class SendEmailComponent implements OnInit {
   public userIdProp : number = -1
   @Input() public destUser : IUser
 
-  constructor(private fb : FormBuilder, public auth : AuthService, private email : EmailSenderService, private toast : ToastService) { 
+  constructor(private fb : FormBuilder, public auth : AuthService, private email : EmailSenderService, private toast : ToastService, private token : TokenService) { 
     this.form = this.fb.group({})
    }
 
   ngOnInit(): void {
-    this.auth.getCurrentUser().subscribe(data => {
+    this.auth.getCurrentUserWithToken(this.token.getToken()!).subscribe(data => {
       this.user = data
     }, (err) => {
       console.error(err)

@@ -4,9 +4,9 @@
             Detale użytkownika
         </mat-card-title>
         <mat-card-content>
-            <h3>Id:{{user.id}}</h3>
             <h3>Personalia: {{user.title}} {{user.firstName}} {{user.lastName}}</h3>
             <h3>Email: <a href="mailto:{{user.email}}">{{user.email}}</a></h3>
+            <h3 *ngIf="departmentDto != undefined || departmentDto != null">Wydział: {{departmentDto.name}} {{departmentDto.initials}}</h3>
         </mat-card-content>
         <mat-card-actions>
             <button class="btn btn-primary" (click)="showSendEmail()">Wyślij email</button>

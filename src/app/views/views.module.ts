@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './admin/admin.module';
 import { PromoterModule } from './promoter/promoter.module';
 import { StudentModule } from './student/student.module';
-import { ShowProposedThesisComponent } from './student/proposed-thesis/show-proposed-thesis/show-proposed-thesis.component';
 
 @NgModule({
   declarations: [
