@@ -24,10 +24,10 @@ export class ShowPromoterThesesComponent implements OnInit, AfterViewInit {
   constructor(private router : Router, private auth : AuthService, private thesisService : ThesisService, private liveAnnouncer : LiveAnnouncer, private toast : ToastService) {
     this.theses = []
 
-    this.auth.currentUser = JSON.parse(localStorage.getItem('currentUserJSON')!)
+    this.auth.currentUser = JSON.parse(localStorage.getItem('user')!)
     this.user = this.auth.currentUser
 
-    this.thesisService.getByPromoterId(this.auth.currentUser.departmentId, this.auth.currentUser.id).subscribe(data => {
+    this.thesisService.getByPromoterId(this.user.departmentId, this.user.id).subscribe(data => {
       this.theses = data
       this.dataSource = new MatTableDataSource(data)
       this.dataSource.sort = this.sort
@@ -55,6 +55,10 @@ export class ShowPromoterThesesComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
@@ -67,7 +71,7 @@ export class ShowPromoterThesesComponent implements OnInit, AfterViewInit {
   redirectTo(id : number){
     this.thesisService.getById(this.user.departmentId, id).subscribe(data => {
       console.log(data);
-      this.router.navigate([`dashboards/thesis/show/`, id], { state : data })
+      this.router.navigate([`dashboards/promoter/thesis`, id], { state : data })
     },
     err => {
       this.toast.errorToast("Error", "Błąd podczas pobierania proponowanego tematu")

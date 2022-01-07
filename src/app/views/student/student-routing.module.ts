@@ -22,64 +22,89 @@ const routes: Routes = [
                     role: ['Admin', 'Student']
                 },
                 path: 'student',
-                component: StudentComponent
+                component: StudentComponent,
+                children:
+                [
+                    {
+                        path: 'thesis',
+                        component: ThesisComponent
+                    },
+                    {
+                        path: 'proposed-thesis',
+                    component: ProposedThesisComponent,
+                    children: 
+                    [
+                        {
+                            path: 'show',
+                            component: ShowProposedThesisComponent,
+                        },
+                        {
+                            path: 'show/:id',
+                            component: DetailsProposedThesisComponent
+                        },
+                        {
+                            path: 'add',
+                            component: AddProposedThesisComponent
+                        }
+                    ]
+                    },
+                    {
+                        path: 'send-email',
+                        component: SendEmailComponent
+                    },
+                    {
+                        path: 'show-promoters',
+                        component: ShowPromotersComponent
+                    }
+                ]
             },
-            {
-                canActivate: [AuthGuard],
-                data: {
-                    role: ['Admin', 'Student']
-                },
-                path: 'student/thesis',
-                component: ThesisComponent
-            },
-            {
-                canActivate: [AuthGuard],
-                data: {
-                    role: ['Admin', 'Student']
-                },
-                path: 'student/proposed-thesis',
-                component: ProposedThesisComponent
-            },
-            {
-                canActivate: [AuthGuard],
-                data: {
-                    role: ['Admin', 'Student']
-                },
-                path: 'student/proposed-thesis/show',
-                component: ShowProposedThesisComponent
-            },
-            {
-                canActivate: [AuthGuard],
-                data: {
-                    role: ['Admin', 'Student']
-                },
-                path: 'student/proposed-thesis/show/:id',
-                component: DetailsProposedThesisComponent
-            },
-            {
-                canActivate: [AuthGuard],
-                data: {
-                    role: ['Admin', 'Student']
-                },
-                path: 'student/proposed-thesis/add',
-                component: AddProposedThesisComponent
-            },
-            {
-                canActivate: [AuthGuard],
-                data: {
-                    role: ['Admin', 'Student']
-                },
-                path: 'student/send-email',
-                component: SendEmailComponent
-            },
-            {
-                canActivate: [AuthGuard],
-                data: {
-                    role: ['Admin', 'Student']
-                },
-                path: 'student/show-promoters',
-                component: ShowPromotersComponent
-            },
+            // {
+            //     canActivate: [AuthGuard],
+            //     data: {
+            //         role: ['Admin', 'Student']
+            //     },
+            //     path: 'student/thesis',
+            //     component: ThesisComponent,
+            // },
+            // {
+            //     canActivate: [AuthGuard],
+            //     data: {
+            //         role: ['Admin', 'Student']
+            //     },
+            //     path: 'student/proposed-thesis',
+            //     component: ProposedThesisComponent,
+            //     children: 
+            //     [
+            //         {
+            //             path: 'show',
+            //             component: ShowProposedThesisComponent,
+            //         },
+            //         {
+            //             path: 'show/:id',
+            //             component: DetailsProposedThesisComponent
+            //         },
+            //         {
+            //             path: 'add',
+            //             component: AddProposedThesisComponent
+            //         }
+            //     ]
+            // },
+            // {
+            //     canActivate: [AuthGuard],
+            //     data: {
+            //         role: ['Admin', 'Student']
+            //     },
+            //     path: 'student/send-email',
+            //     component: SendEmailComponent
+            // },
+            // {
+            //     canActivate: [AuthGuard],
+            //     data: {
+            //         role: ['Admin', 'Student']
+            //     },
+            //     path: 'student/show-promoters',
+            //     component: ShowPromotersComponent
+            // },
             {
                 path: '**',
                 redirectTo: 'authentication/404'

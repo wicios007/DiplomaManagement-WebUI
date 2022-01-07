@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="mat-card" style="padding-left: 10px">
+        <div class="mat-card-title">
+            <div>
+                <h1>Tytuł: <b>{{these.name}}</b></h1>
+            </div>
+        </div>
+        <div class="mat-card-content">
+            <div class="row">
+                <h2>Tytuł po angielsku: <b>{{these.nameEnglish}}</b></h2>    
+            </div>
+            <div class="row">
+                <h3>Student: <a routerLink="/dashboards/user-details/{{student.id}}">{{student.firstName}} {{student.lastName}}</a></h3>
+            </div>
+            <div class="row">
+                <h3>Opis: <em>{{these.description}}</em></h3>
+            </div>
+            
+
+        </div>
+        <div class="mat-card-actions">
+
+        </div>
+    </div>
+    <div>
+        
+    </div>
+</div>
+<!-- <app-shared-details-comments-proposed-thesis></app-shared-details-comments-proposed-thesis> -->
+<!-- <app-department-details></app-department-details> -->
+    <!-- <app-details-comments-proposed-thesis (thesisId)="these.id" *ngIf="this.showComments"></app-details-comments-proposed-thesis> -->
+    <!-- <app-details-comments-proposed-thesis [thesisIdEvent]="these.id" [showCommentsBtn]="true" *ngIf="this.showComments"></app-details-comments-proposed-thesis> -->

@@ -9,6 +9,7 @@ import { PromoterComponent } from "./promoter.component";
 import { ShowStudentsComponent } from "./show-students/show-students.component";
 import { ShowPromoterThesesComponent } from './show-promoter-theses/show-promoter-theses.component';
 import { ShowThesisDetailsComponent } from './show-thesis-details/show-thesis-details.component';
+import { StudentModule } from "../student/student.module";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ShowThesisDetailsComponent } from './show-thesis-details/show-thesis-de
     MaterialModule,
     SharedModule,
     PromoterRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StudentModule
   ]
 })
 export class PromoterModule { }

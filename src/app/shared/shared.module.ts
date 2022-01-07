@@ -9,6 +9,10 @@ import { SendEmailComponent } from './send-email/send-email.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DepartmentDetailsComponent } from './department-details/department-details.component';
+import { ShowProposedThesisComponent } from './show-proposed-thesis/show-proposed-thesis.component';
+import { DetailsCommentProposedThesisAddComponent } from './details-proposed-thesis/details-comment-proposed-thesis-add/details-comment-proposed-thesis-add.component';
+import { DetailsCommentsProposedThesisComponent } from './details-proposed-thesis/details-comments-proposed-thesis/details-comments-proposed-thesis.component';
+import { DetailsProposedThesisComponent } from './details-proposed-thesis/details-proposed-thesis.component';
 
 
 
@@ -19,7 +23,11 @@ import { DepartmentDetailsComponent } from './department-details/department-deta
     SpinnerComponent,
     UserDetailsComponent,
     SendEmailComponent,
-    DepartmentDetailsComponent
+    DepartmentDetailsComponent,
+    ShowProposedThesisComponent,
+    DetailsProposedThesisComponent,
+    DetailsCommentsProposedThesisComponent,
+    DetailsCommentProposedThesisAddComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +39,10 @@ import { DepartmentDetailsComponent } from './department-details/department-deta
     FooterComponent,
     HeaderComponent,
     SpinnerComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    DetailsProposedThesisComponent,
+    DetailsCommentsProposedThesisComponent,
+    DetailsCommentProposedThesisAddComponent
   ]
 })
 export class SharedModule { }

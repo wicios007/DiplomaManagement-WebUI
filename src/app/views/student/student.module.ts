@@ -43,6 +43,10 @@ import { ShowPromotersComponent } from './show-promoters/show-promoters.componen
         SharedModule,
         StudentRoutingModule,
         ReactiveFormsModule
+    ],
+    exports: [
+        DetailsCommentsProposedThesisComponent,
+        ShowProposedThesisComponent,
     ]
 })
 export class StudentModule { }

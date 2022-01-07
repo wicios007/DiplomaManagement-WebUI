@@ -14,52 +14,46 @@ export class ShowThesisDetailsComponent implements OnInit {
 
   user : IUser
   thesis : IThesisDto
-  public promoter : IUser
+  public student! : IUser
+  public promoter! : IUser
   public isThesisExist : boolean = false
   thesisId : number = 0
 
   constructor(private thesisService : ThesisService, private auth : AuthService, private activatedRoute : ActivatedRoute) {
     
-    this.auth.currentUser = JSON.parse(localStorage.getItem('currentUserJSON')!)
+    // this.auth.currentUser = JSON.parse(localStorage.getItem('user')!)
+    this.user = JSON.parse(localStorage.getItem('user')!)
 
     this.activatedRoute.params.subscribe(res => {
       console.log(res.id)
       this.thesisId = res.id
-    }, err => console.error(err),
-    () => {
-      this.thesisService.getById(this.user.departmentId, this.thesisId).subscribe(data => {
-        this.auth.getUserById(data.promoterId).subscribe(data => {
-          this.promoter = data
-        })
-        this.isThesisExist = true
-        this.thesis = data
-      })
     })
 
-    // this.auth.getCurrentUser().subscribe(data => {
-    //   this.user = data
-    // }, err => console.error(err),
-    // () => {
-    //   this.activatedRoute.params.subscribe(res => {
-    //     console.log(res.id)
-    //     this.thesisId = res.id
-    //   }, (err => console.error(err)), 
-    //   () => {
-    //     this.thesisService.getById(this.user.departmentId, this.thesisId).subscribe(data => {
-    //         this.auth.getUserById(data.promoterId).subscribe(data => {
-    //           this.promoter = data
-    //         })
-    //         this.isThesisExist = true
-    //         this.thesis = data
-    //       })
-    //   })
-    // })
+    this.thesisService.getById(this.user.departmentId, this.thesisId).subscribe(data => {
+      console.log(data),
+      this.thesis = data
+      this.isThesisExist = true
+    }, 
+    err => console.error(err), 
+    () => {
+      this.auth.getUserById(this.thesis.studentId).subscribe(data => {
+        this.student = data
+      }, err => console.error(err),
+      () => {
+        this.auth.getUserById(this.thesis.promoterId).subscribe(data => {
+          this.promoter = data
+        })
+      })
+    })
    }
 
   ngOnInit(): void {
-    this.auth.getUserById(this.thesis.promoterId).subscribe(data => {
-      this.promoter = data
-    })
+    //  this.auth.getUserById(this.thesis.studentId).subscribe(data => {
+    //    this.student = data
+    //  })
+    //  this.auth.getUserById(this.thesis.promoterId).subscribe(data => {
+    //    this.promoter = data
+    //  })
   }
   ngOnDestroy(){
     console.log("component destroyed")

@@ -14,17 +14,19 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class ShowStudentsComponent implements OnInit {
   users : IUser[]
+  user! : IUser
   displayedColumns : string[] = ['firstName', 'lastName', 'email']
   //dataSource = new MatTableDataSource<IUser>()
   dataSource : MatTableDataSource<IUser> = new MatTableDataSource<IUser>()
   constructor(private auth : AuthService, private router : Router, private liveAnnouncer : LiveAnnouncer, private toast : ToastService) { 
+    this.user = JSON.parse(localStorage.getItem('user')!)
     this.users = [] 
   }
 
 
   ngOnInit(): void {
 
-    this.auth.getUsersByRole(2).subscribe((data : IUser[]) => {
+    this.auth.getUsersByRoleAndDepartment(this.user.departmentId, 2).subscribe((data : IUser[]) => {
       this.dataSource = new MatTableDataSource(data)
       this.dataSource.sort = this.sort
       this.users = data
@@ -58,7 +60,8 @@ export class ShowStudentsComponent implements OnInit {
   redirectTo(id: number) {
     this.auth.getUserById(id).subscribe(data => {
       console.log(data);
-      this.router.navigate([`dashboards/user-details`, id], { state: data })
+      this.router.navigate([`dashboards/promoter/user-details`, id], { state: data })
+      //user-details/:id
     },
       err => {
         this.toast.errorToast("Error", "Błąd podczas pobierania użytkownika")

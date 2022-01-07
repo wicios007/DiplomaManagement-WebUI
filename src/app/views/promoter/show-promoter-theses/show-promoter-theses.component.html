@@ -1,9 +1,15 @@
-<app-promoter-navbar></app-promoter-navbar>
 <div class="container text-center" *ngIf="dataSource.data.length < 1">
     <h1>Brak danych</h1>
 </div>
 <!--  *ngIf="dataSource.data.length >= 1" -->
 <div class="container">
+    <div class="row">
+        <mat-form-field appearance="standard" style="width: 100%">
+            <mat-label>Filtrowanie</mat-label>
+            <input class="btn-block" matInput (keyup)="applyFilter($event)" placeholder="" #input>
+        </mat-form-field>
+    </div>
+    <div class="row">
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
     class="mat-elevation-z8" style="width: 100%">
     <ng-container matColumnDef="id">
@@ -36,5 +42,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="redirectTo(row.id)" ></tr>
 </table> 
+</div>
 </div>
 

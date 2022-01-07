@@ -5,5 +5,6 @@ export interface IUser{
     lastName : string;
     departmentId : number;
     indexNumber? : string
-    title? : string
+    title? : string,
+    roleName : string
 }

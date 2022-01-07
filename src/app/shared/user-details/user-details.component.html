@@ -6,11 +6,14 @@
         <mat-card-content>
             <h3>Personalia: {{user.title}} {{user.firstName}} {{user.lastName}}</h3>
             <h3>Email: <a href="mailto:{{user.email}}">{{user.email}}</a></h3>
+            <h3>Rola: {{user.roleName}}</h3>
             <h3 *ngIf="departmentDto != undefined || departmentDto != null">Wydział: {{departmentDto.name}} {{departmentDto.initials}}</h3>
+
         </mat-card-content>
         <mat-card-actions>
             <button class="btn btn-primary" (click)="showSendEmail()">Wyślij email</button>
         </mat-card-actions>
     </mat-card>
     <app-send-email [destUser]="user" *ngIf="this.showSendEmailComponent"></app-send-email>
+    <app-show-proposed-thesis></app-show-proposed-thesis>
 </div>
