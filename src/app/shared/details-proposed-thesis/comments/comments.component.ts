@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ICommentDto } from 'src/app/interfaces/ICommentDto';
 import { IUser } from 'src/app/interfaces/IUser';
 import { AuthService } from 'src/app/services/auth.service';
@@ -7,11 +7,11 @@ import { ProposedThesisCommentsService } from 'src/app/services/proposed-thesis-
 import { ProposedThesisService } from 'src/app/services/proposed-thesis.service';
 
 @Component({
-  selector: 'app-details-comments-proposed-thesis',
-  templateUrl: './details-comments-proposed-thesis.component.html',
-  styleUrls: ['./details-comments-proposed-thesis.component.css']
+  selector: 'app-shared-proposed-thesis-comments',
+  templateUrl: './comments.component.html',
+  styleUrls: ['./comments.component.css']
 })
-export class DetailsCommentsProposedThesisComponent implements OnInit {
+export class CommentsComponent implements OnInit {
 
   comments : ICommentDto[] = [];
   user : IUser
@@ -52,4 +52,5 @@ export class DetailsCommentsProposedThesisComponent implements OnInit {
     this.addCommentShow = !this.addCommentShow
 
   }
+
 }

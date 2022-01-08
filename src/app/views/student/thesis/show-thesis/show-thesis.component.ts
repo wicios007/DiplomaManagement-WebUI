@@ -71,4 +71,8 @@ export class ShowThesisComponent implements OnInit, OnDestroy {
     this.commentBtnEvent.emit(false)
   }
 
+  print(){
+   
+  }
+
 }

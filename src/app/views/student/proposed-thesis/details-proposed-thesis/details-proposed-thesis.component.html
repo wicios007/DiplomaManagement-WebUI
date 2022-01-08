@@ -1,24 +1,24 @@
 <div class="container">
     <button class="btn btn-primary" routerLink="..">Powrót do listy</button>
     <button class="btn btn-primary" (click) = "toggleComments()">{{showCommentsBtnText}}</button>
-    <div class="mat-card" style="padding-left: 10px">
-        <div class="mat-card-title">
+    <mat-card class="mat-card" style="padding-left: 10px">
+        <mat-card-title class="mat-card-title">
             <div>
                 <h1>Tytuł: <b>{{these.name}}</b></h1>
             </div>
-        </div>
-        <div class="mat-card-content">
+        </mat-card-title>
+        <mat-card-content class="mat-card-content">
             <div class="row">
                 <h2>Tytuł po angielsku: <b>{{these.nameEnglish}}</b></h2>    
             </div>
             <div class="row">
                 <h3>Opis: <em>{{these.description}}</em></h3>
             </div>
-        </div>
-        <div class="mat-card-actions">
+        </mat-card-content>
+        <mat-card-actions class="mat-card-actions">
             <!-- <app-details-comments-proposed-thesis (thesisId)="these.id" *ngIf="this.showComments"></app-details-comments-proposed-thesis> -->
-        </div>
-    </div>
+        </mat-card-actions>
+    </mat-card>
     <div>
         <app-details-comments-proposed-thesis [thesisIdEvent]="these.id" [showCommentsBtn]="true" *ngIf="this.showComments"></app-details-comments-proposed-thesis>
     </div>

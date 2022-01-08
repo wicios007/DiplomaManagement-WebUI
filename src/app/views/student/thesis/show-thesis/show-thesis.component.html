@@ -1,28 +1,15 @@
-<!-- <div class="container">
-    <div class="mat-card">
-        <div class="mat-card-title text-center">
-            <h1>Praca dyplomowa</h1>
-        </div>
-        <div class="mat-card-content">
-            <div *ngIf="!isThesisExist">Brak zaakceptowanej pracy dyplomowej</div>
-            <div *ngIf="isThesisExist">
-                Nazwa{{thesis.name}}
-            </div>
-        </div>
-    </div>
-</div> -->
-<div class="container">
-    <div class="mat card" style="padding-left: 10px" *ngIf="!isThesisExist">
-        <div class="mat-card-title text-center">
+<div class="container" id='kontener'>
+    <mat-card class="mat card" style="padding-left: 10px" *ngIf="!isThesisExist">
+        <mat-card-title class="text-center">
             <h1>Brak zaakceptowanej pracy dyplomowej</h1>
             <h3>Promotor musi zaakceptować pracę dyplomową</h3>
-        </div>
-    </div>
-    <div class="mat-card" style="padding-left: 10px" *ngIf="isThesisExist">
-        <div class="mat-card-title">
+        </mat-card-title>
+    </mat-card>
+    <mat-card class="mat-card" style="padding-left: 10px" *ngIf="isThesisExist">
+        <mat-card-title class="mat-card-title">
             <h1>Tytuł: <b>{{thesis.name}}</b></h1>
-        </div>
-        <div class="mat-card-content">
+        </mat-card-title>
+        <mat-card-content class="mat-card-content">
             <div class="row">
                 <h2>Tytuł po angielsku: <b>{{thesis.nameEnglish}}</b></h2>
             </div>
@@ -32,10 +19,16 @@
             <div class="row">
                 <h3>Opis: <em>{{thesis.description}}</em></h3>
             </div>
-        </div>
-        <div class="mat-card-actions">
-            <button class="btn btn-primary" (click)="toggleHistoryComments()">Pokaż komentarze do pracy</button>
-        </div>
-    </div>
+        </mat-card-content>
+        <mat-card-actions class="mat-card-actions">
+            <div class="row">
+                <button class="btn btn-primary" (click)="print()">Pobierz kartę pracy dyplomowej</button>
+            </div><br>
+            <div class="row">
+                <button class="btn btn-primary" (click)="toggleHistoryComments()">Pokaż komentarze do pracy</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
     <app-details-comments-proposed-thesis [thesisIdEvent]="thesis.id" [showCommentsBtn]="false" *ngIf="historyCommentsShow"></app-details-comments-proposed-thesis>
 </div>
+<!-- <app-thesis-card-pdf [thesis]="thesis" [student]="user" [promoter]="promoter"></app-thesis-card-pdf> -->

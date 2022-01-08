@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { IUser } from 'src/app/interfaces/IUser';
 import { AuthService } from 'src/app/services/auth.service';
@@ -7,11 +7,11 @@ import { ProposedThesisCommentsService } from 'src/app/services/proposed-thesis-
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
-  selector: 'app-details-comment-proposed-thesis-add',
-  templateUrl: './details-comment-proposed-thesis-add.component.html',
-  styleUrls: ['./details-comment-proposed-thesis-add.component.css']
+  selector: 'app-shared-proposed-thesis-comments-add',
+  templateUrl: './comments-add.component.html',
+  styleUrls: ['./comments-add.component.css']
 })
-export class DetailsCommentProposedThesisAddComponent implements OnInit {
+export class CommentsAddComponent implements OnInit {
 
   public form : FormGroup
   user : IUser
@@ -51,5 +51,4 @@ export class DetailsCommentProposedThesisAddComponent implements OnInit {
     })
 
   }
-
 }

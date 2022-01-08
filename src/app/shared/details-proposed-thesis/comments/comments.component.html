@@ -1,16 +1,17 @@
 <div class="container">
-    <!-- <button class="btn btn-primary" (click)="showAddCommentBtn()" *ngIf="showCommentsBtn">Dodaj komentarz</button> -->
+    <button class="btn btn-primary" (click)="showAddCommentBtn()" *ngIf="showCommentsBtn">Dodaj komentarz</button>
     <div class="row">
-        <!-- <app-details-comment-proposed-thesis-add *ngIf="addCommentShow"></app-details-comment-proposed-thesis-add> -->
+        <app-shared-proposed-thesis-comments-add *ngIf="addCommentShow"></app-shared-proposed-thesis-comments-add>
 
         <div class="col">
             <div class='text-center' *ngIf="comments.length == 0"><h3>Brak komentarzy do pracy</h3></div>
-            <table class="table table-stripped" *ngIf="comments.length > 0">
+            
+            <table class="table table-stripped table-hover table-responsive" *ngIf="comments.length > 0">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Dodano przez</th>
-                        <th scope="col">Treść</th>
+                        <th scope="col" style="width: 10%">#</th>
+                        <th scope="col" style="width: 20%">Dodano przez</th>
+                        <th scope="col" style="width: 70%">Treść</th>
                     </tr>
                 </thead>
                 <tbody>

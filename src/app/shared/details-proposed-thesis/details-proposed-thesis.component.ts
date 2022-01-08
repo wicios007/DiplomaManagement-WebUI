@@ -4,6 +4,8 @@ import { IProposedThesisDto } from 'src/app/interfaces/IProposedThesisDto';
 import { IUser } from 'src/app/interfaces/IUser';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProposedThesisService } from 'src/app/services/proposed-thesis.service';
+import { ThesisService } from 'src/app/services/thesis.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-details-proposed-thesis',
@@ -22,7 +24,7 @@ export class DetailsProposedThesisComponent implements OnInit {
   @Output()
   thesisIdEvent: EventEmitter<number> = new EventEmitter();
 
-  constructor(private router : Router, private activatedRoute : ActivatedRoute, private propTheses : ProposedThesisService, private auth : AuthService) {
+  constructor(private router : Router, private activatedRoute : ActivatedRoute, private toast : ToastService, private propTheses : ProposedThesisService, private auth : AuthService) {
     this.showComments = true
     this.showCommentsBtnText = "Pokaż komentarze"
     this.thesisId = 0
@@ -57,5 +59,14 @@ export class DetailsProposedThesisComponent implements OnInit {
 
   emitId(id: number){
     this.thesisIdEvent.emit(id)
+  }
+
+  acceptThesis(){
+    this.propTheses.accept(this.student.departmentId, this.these.id).subscribe(data => {
+      this.toast.successToast("Sukces!", `Praca dyplomowa ${this.these.name} została zaakceptowana.`)
+    }, 
+    err => {
+      this.toast.errorToast("Błąd!", `Praca dyplomowa ${this.these.name} nie została zaakceptowana. `)
+    })
   }
 }

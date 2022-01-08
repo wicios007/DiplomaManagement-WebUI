@@ -18,6 +18,7 @@ import { StudentComponent } from "./student.component";
 import { ShowThesisComponent } from "./thesis/show-thesis/show-thesis.component";
 import { ThesisComponent } from "./thesis/thesis.component";
 import { ShowPromotersComponent } from './show-promoters/show-promoters.component';
+import { ThesisCardPdfComponent } from './thesis/thesis-card-pdf/thesis-card-pdf.component';
 
 
 
@@ -35,7 +36,8 @@ import { ShowPromotersComponent } from './show-promoters/show-promoters.componen
         StudentPropThesisNavMenuComponent,
         ThesisComponent,
         ShowThesisComponent,
-        ShowPromotersComponent
+        ShowPromotersComponent,
+        ThesisCardPdfComponent
     ],
     imports: [
         CommonModule,

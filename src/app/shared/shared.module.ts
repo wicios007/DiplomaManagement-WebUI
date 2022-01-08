@@ -10,9 +10,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DepartmentDetailsComponent } from './department-details/department-details.component';
 import { ShowProposedThesisComponent } from './show-proposed-thesis/show-proposed-thesis.component';
-import { DetailsCommentProposedThesisAddComponent } from './details-proposed-thesis/details-comment-proposed-thesis-add/details-comment-proposed-thesis-add.component';
-import { DetailsCommentsProposedThesisComponent } from './details-proposed-thesis/details-comments-proposed-thesis/details-comments-proposed-thesis.component';
 import { DetailsProposedThesisComponent } from './details-proposed-thesis/details-proposed-thesis.component';
+import { CommentsComponent } from './details-proposed-thesis/comments/comments.component';
+import { CommentsAddComponent } from './details-proposed-thesis/comments-add/comments-add.component';
 
 
 
@@ -26,8 +26,9 @@ import { DetailsProposedThesisComponent } from './details-proposed-thesis/detail
     DepartmentDetailsComponent,
     ShowProposedThesisComponent,
     DetailsProposedThesisComponent,
-    DetailsCommentsProposedThesisComponent,
-    DetailsCommentProposedThesisAddComponent
+    CommentsComponent,
+    CommentsAddComponent,
+
   ],
   imports: [
     CommonModule,
@@ -39,10 +40,7 @@ import { DetailsProposedThesisComponent } from './details-proposed-thesis/detail
     FooterComponent,
     HeaderComponent,
     SpinnerComponent,
-    UserDetailsComponent,
-    DetailsProposedThesisComponent,
-    DetailsCommentsProposedThesisComponent,
-    DetailsCommentProposedThesisAddComponent
+    UserDetailsComponent
   ]
 })
 export class SharedModule { }
