@@ -5,4 +5,5 @@ export interface IProposedThesisDto{
     name : string,
     nameEnglish : string,
     description : string
+    isAccepted : boolean
 }

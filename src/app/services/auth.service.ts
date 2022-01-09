@@ -73,6 +73,10 @@ export class AuthService {
     )
   }
 
+  // login(data: any){
+  //   return this.http.post<any>(`${this.ApiURL}account/login`, data)
+  // }
+
   register(data : any){
     
     return this.http.post<any>(this.ApiURL + 'account/register', data, this.httpOptions)

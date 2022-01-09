@@ -12,7 +12,7 @@ import { ProposedThesisService } from 'src/app/services/proposed-thesis.service'
 })
 export class DetailsProposedThesisComponent implements OnInit {
 
-  these : IProposedThesisDto = {id:0, studentId:0, createdById:0, name:"", nameEnglish:"", description:""}
+  these : IProposedThesisDto = {id:0, studentId:0, createdById:0, name:"", nameEnglish:"", description:"", isAccepted : false}
   user : IUser
   thesisId : number
   showComments : boolean

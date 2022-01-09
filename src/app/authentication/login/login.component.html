@@ -15,6 +15,9 @@
                         <small
                         *ngIf="$any(form).controls['email'].hasError('required') && $any(form).controls['email'].touched"
                         class="text-danger support-text">Login jest wymagany</small>
+                        <small
+                        *ngIf="$any(form).controls['email'].hasError('email') && $any(form).controls['email'].touched"
+                        class="text-danger support-text">Login nie jest poprawnym adresem email</small>
                     </mat-form-field>
                 </div>
                 <div>

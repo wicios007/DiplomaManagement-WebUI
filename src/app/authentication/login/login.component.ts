@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,9 @@ export class LoginComponent implements OnInit {
   public form: FormGroup
   errorString : string = ""
 
-  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService) {
+  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService, private toast : ToastService) {
     this.form = fb.group({
-      email: [null, Validators.compose([Validators.required])],
+      email: [null, Validators.compose([Validators.required, Validators.email])],
       password: [null, Validators.compose([Validators.required, Validators.minLength(8)])]
     })
   }
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
     console.log(this.form.value)
     this.auth.login(this.form.value)
       .subscribe(res => {
-        //console.log(res);
+        console.log(res);
         if (res.access_token) {
           sessionStorage.setItem('token', res.access_token);
           sessionStorage.setItem('role', res.user_role),
@@ -58,7 +59,8 @@ export class LoginComponent implements OnInit {
         }
       }, (err : any) => {
         console.log(err.error)
-        this.errorString = err.error
+        this.toast.errorToast("Błąd!", err.error)
+        // this.errorString = err.error.toString()
       }, () => {
         // this.auth.getCurrentUser().subscribe(data => {
         //   this.auth.currentUser = data
