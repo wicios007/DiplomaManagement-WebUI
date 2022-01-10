@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { UserDetailsComponent } from 'src/app/shared/user-details/user-details.component';
 import { AddProposedThesisComponent } from './proposed-thesis/add-proposed-thesis/add-proposed-thesis.component';
 import { DetailsProposedThesisComponent } from './proposed-thesis/details-proposed-thesis/details-proposed-thesis.component';
 import { ProposedThesisComponent } from './proposed-thesis/proposed-thesis.component';
@@ -55,56 +56,13 @@ const routes: Routes = [
                     {
                         path: 'show-promoters',
                         component: ShowPromotersComponent
+                    },
+                    {
+                        path: 'user-details/:id',
+                        component: UserDetailsComponent
                     }
                 ]
             },
-            // {
-            //     canActivate: [AuthGuard],
-            //     data: {
-            //         role: ['Admin', 'Student']
-            //     },
-            //     path: 'student/thesis',
-            //     component: ThesisComponent,
-            // },
-            // {
-            //     canActivate: [AuthGuard],
-            //     data: {
-            //         role: ['Admin', 'Student']
-            //     },
-            //     path: 'student/proposed-thesis',
-            //     component: ProposedThesisComponent,
-            //     children: 
-            //     [
-            //         {
-            //             path: 'show',
-            //             component: ShowProposedThesisComponent,
-            //         },
-            //         {
-            //             path: 'show/:id',
-            //             component: DetailsProposedThesisComponent
-            //         },
-            //         {
-            //             path: 'add',
-            //             component: AddProposedThesisComponent
-            //         }
-            //     ]
-            // },
-            // {
-            //     canActivate: [AuthGuard],
-            //     data: {
-            //         role: ['Admin', 'Student']
-            //     },
-            //     path: 'student/send-email',
-            //     component: SendEmailComponent
-            // },
-            // {
-            //     canActivate: [AuthGuard],
-            //     data: {
-            //         role: ['Admin', 'Student']
-            //     },
-            //     path: 'student/show-promoters',
-            //     component: ShowPromotersComponent
-            // },
             {
                 path: '**',
                 redirectTo: 'authentication/404'

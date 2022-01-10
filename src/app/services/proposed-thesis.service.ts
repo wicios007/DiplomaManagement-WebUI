@@ -17,33 +17,54 @@ export class ProposedThesisService {
 
   constructor(private http: HttpClient, private auth : AuthService, private token : TokenService) { }
 
-  public httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.token.getToken()}`
-    })
-  }
+  // public httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Bearer ${this.token.getToken()}`
+  //   })
+  // }
 
   getById(departmentId : number, propThesisId: number){
-    return this.http.get<IProposedThesisDto>(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}`, this.httpOptions)
+    return this.http.get<IProposedThesisDto>(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}`, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
   getAll(departmentId : number){
-    return this.http.get<IProposedThesisDto[]>(`${this.ApiURL}department/${departmentId}/proposedThesis/`, this.httpOptions)
+    return this.http.get<IProposedThesisDto[]>(`${this.ApiURL}department/${departmentId}/proposedThesis/`, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
   getAllByStudent(departmentId : number, studentId : number){
-    return this.http.get<IProposedThesisDto[]>(`${this.ApiURL}department/${departmentId}/proposedThesis/student/${studentId}`, this.httpOptions)
+    return this.http.get<IProposedThesisDto[]>(`${this.ApiURL}department/${departmentId}/proposedThesis/student/${studentId}`, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
   create(departmentId : number, createPropThesisDto : any){
-    return this.http.post<IProposedThesisCreateDto>(`${this.ApiURL}department/${departmentId}/proposedThesis`, createPropThesisDto, this.httpOptions)
+    return this.http.post<IProposedThesisCreateDto>(`${this.ApiURL}department/${departmentId}/proposedThesis`, createPropThesisDto, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
   update(departmentId: number, propThesisId: number, propThesisUpdateDto : IProposedThesisUpdateDto){
-    return this.http.put<IProposedThesisCreateDto>(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}`, propThesisUpdateDto, this.httpOptions)
+    return this.http.put<IProposedThesisCreateDto>(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}`, propThesisUpdateDto, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
   delete(departmentId : number, propThesisId : number){
-    return this.http.delete(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}`, this.httpOptions)
+    return this.http.delete(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}`, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
   accept(departmentId : number, propThesisId : number){
-    return this.http.post(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}`, this.httpOptions)
+    return this.http.post(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}/accept`, null, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
 
 }

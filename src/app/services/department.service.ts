@@ -32,19 +32,34 @@ export class DepartmentService {
   }
 
   getAll(){
-    return this.http.get<IDepartmentDto[]>(`${this.ApiURL}department`, this.auth.httpOptions)
+    return this.http.get<IDepartmentDto[]>(`${this.ApiURL}department`, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
   getById(id : number){
-    return this.http.get<IDepartmentDto>(`${this.ApiURL}department/${id}`, this.auth.httpOptions)
+    return this.http.get<IDepartmentDto>(`${this.ApiURL}department/${id}`, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
   delete(id : number){
-    return this.http.delete(`${this.ApiURL}department/${id}`, this.auth.httpOptions)
+    return this.http.delete(`${this.ApiURL}department/${id}`, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
   create(dto : DepartmentDto){
-    return this.http.post(`${this.ApiURL}department`, dto, this.auth.httpOptions) 
+    return this.http.post(`${this.ApiURL}department`, dto, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })}) 
   }
   update(id : number, departmentDto : IDepartmentUpdate){
-    return this.http.put(`${this.ApiURL}department/${id}`, departmentDto, this.auth.httpOptions)
+    return this.http.put(`${this.ApiURL}department/${id}`, departmentDto, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IUser } from 'src/app/interfaces/IUser';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,9 +9,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class StudentComponent implements OnInit {
 
-  constructor(private auth : AuthService) { }
+  user : IUser
+  constructor() { }
 
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('user')!)
   }
 
 }

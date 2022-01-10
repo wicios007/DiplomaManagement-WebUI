@@ -22,18 +22,33 @@ export class ProposedThesisCommentsService {
   }
 
   getById(departmentId : number, propThesisId: number, commentId : number){
-    return this.http.get<ICommentDto>(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}/comment/${commentId}`, this.httpOptions)
+    return this.http.get<ICommentDto>(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}/comment/${commentId}`, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
   getAll(departmentId : number, propThesisId : number){
-    return this.http.get<ICommentDto[]>(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}/comment/`, this.httpOptions)
+    return this.http.get<ICommentDto[]>(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}/comment/`, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
   create(departmentId : number, propThesisId : number, commentDto : ICommentDto){
-    return this.http.post<ICommentDto>(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}/comment`, commentDto, this.httpOptions)
+    return this.http.post<ICommentDto>(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}/comment`, commentDto, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
   update(departmentId: number, propThesisId: number, commentId : number, commentDto : ICommentDto){
-    return this.http.put<ICommentDto>(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}/comment/${commentId}`, commentDto, this.httpOptions)
+    return this.http.put<ICommentDto>(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}/comment/${commentId}`, commentDto, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
   delete(departmentId : number, propThesisId : number, commentId : number){
-    return this.http.delete(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}/comment/${commentId}`, this.httpOptions)
+    return this.http.delete(`${this.ApiURL}department/${departmentId}/proposedThesis/${propThesisId}/comment/${commentId}`, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
 }

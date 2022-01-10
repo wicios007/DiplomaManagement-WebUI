@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { DepartmentDetailsComponent } from 'src/app/shared/department-details/department-details.component';
+import { UserDetailsComponent } from 'src/app/shared/user-details/user-details.component';
+import { AdminComponent } from './admin.component';
 import { DepartmentAddComponent } from './department/department-add/department-add.component';
 import { DepartmentListComponent } from './department/department-list/department-list.component';
 import { DepartmentComponent } from './department/department.component';
@@ -59,6 +61,10 @@ const routes: Routes = [
                         {
                             path: 'user-list',
                             component: UserListComponent
+                        },
+                        {
+                            path: ':id',
+                            component: UserDetailsComponent
                         }
                     ]
 

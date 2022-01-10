@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
         }
       }, (err : any) => {
         console.log(err.error)
-        this.toast.errorToast("Błąd!", err.error)
+        this.toast.errorToast("Błąd!", err.error.toString())
         // this.errorString = err.error.toString()
       }, () => {
         // this.auth.getCurrentUser().subscribe(data => {

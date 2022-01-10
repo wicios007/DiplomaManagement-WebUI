@@ -52,7 +52,7 @@ export class AuthService {
   public httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.token.getToken()}`
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
     })
   }
 
@@ -61,7 +61,6 @@ export class AuthService {
     return this.http.post<any>(this.ApiURL + 'account/login', data)
     .pipe(
       tap(_ => {
-        // sessionStorage.setItem('currentUser', data.email) //dlaczego przy próbie ustawienia session storage wartosc currentUser jest undefined, a przy localstorage juz nie?
         localStorage.setItem('currentUser', data.email)
       }),
       catchError((err) => {
@@ -73,13 +72,13 @@ export class AuthService {
     )
   }
 
-  // login(data: any){
-  //   return this.http.post<any>(`${this.ApiURL}account/login`, data)
-  // }
 
   register(data : any){
     
-    return this.http.post<any>(this.ApiURL + 'account/register', data, this.httpOptions)
+    return this.http.post<any>(this.ApiURL + 'account/register', data, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
     .pipe(
       catchError((err) => {
         console.log('err service')
@@ -96,24 +95,12 @@ export class AuthService {
       catchError(this.handleError("getUsers", []))
     )
   }
-  /*
-    {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token.getToken()}`
-      }),
-      params: new HttpParams({
-        fromObject : {
-          roleValue : role
-        }
-      }))
-  */
 
   getUsersByRole(role : number) : Observable<IUser[]>{
     return this.http.get<IUser[]>(`${this.ApiURL}account/usersByRole`,{
       headers : new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token.getToken()}`
+        Authorization: `Bearer ${sessionStorage.getItem('token')!}`
       }),
       params : new HttpParams({
         fromObject : {
@@ -131,7 +118,7 @@ export class AuthService {
     return this.http.get<IUser[]>(`${this.ApiURL}account/users/department/${departmentId}`,{
       headers : new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token.getToken()}`
+        Authorization: `Bearer ${sessionStorage.getItem('token')!}`
       }),
       params : new HttpParams({
         fromObject : {
@@ -150,7 +137,10 @@ export class AuthService {
   }
 
   getCurrentUser(){
-    return this.http.get<IUser>(`${this.ApiURL}account/users/current`, this.httpOptions)
+    return this.http.get<IUser>(`${this.ApiURL}account/users/current`, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
   }
 
   getCurrentUserWithToken(token : string){

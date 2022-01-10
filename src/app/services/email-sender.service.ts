@@ -21,7 +21,10 @@ export class EmailSenderService {
   }
 
   sendEmail(dto : ISendEmail){
-    return this.http.post<any>(`${this.ApiURL}account/send`, dto, this.httpOptions);
+    return this.http.post<any>(`${this.ApiURL}account/send`, dto, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })});
   }
 
 }

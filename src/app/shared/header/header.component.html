@@ -5,8 +5,7 @@
       </a>
 
       <ul class="nav nav-pills">
-        <!-- <li class="nav-item"><a [routerLink]="['/dashboards/user-details', userId]" class="nav-link">{{loggedUser}}</a></li> -->
-        <li class="nav-item"><a [routerLink]="['/dashboards/user-details', userId]" class="nav-link">{{loggedUser}}</a></li>
+        <li class="nav-item"><a class="nav-link" (click)="redirectTo()">{{user.firstName}} {{user.lastName}} | {{loggedUser}}</a></li>
         <li class="nav-item"><button class="btn btn-primary" (click) = "logout()">Wyloguj się</button></li>
       </ul>
     </header>

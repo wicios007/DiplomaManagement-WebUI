@@ -46,7 +46,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
   redirectTo(id : number){
     this.auth.getUserById(id).subscribe(data => {
       console.log(data);
-      this.router.navigate([`dashboards/user-details`, id], { state: data })
+      this.router.navigate([`dashboards/admin/user`, id], { state: data })
     },
       err => {
         this.toast.errorToast("Error", "Błąd podczas pobierania użytkownika")

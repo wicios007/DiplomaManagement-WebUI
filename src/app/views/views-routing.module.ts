@@ -28,12 +28,12 @@ const routes: Routes = [
     data: {roles: ['Admin, Student']},
     loadChildren: () => import('./student/student.module').then(c => c.StudentModule)
   },
-  {
-    canActivate: [AuthGuard],
-    data: {roles: ['Admin', 'Promoter', 'Student']},
-    path: 'user-details/:id',
-    component: UserDetailsComponent
-  },
+  // {
+  //   canActivate: [AuthGuard],
+  //   data: {roles: ['Admin', 'Promoter', 'Student']},
+  //   path: 'user-details/:id',
+  //   component: UserDetailsComponent
+  // },
   {
     path: '**',
     redirectTo: 'authentication/404'

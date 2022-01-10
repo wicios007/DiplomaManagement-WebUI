@@ -66,6 +66,7 @@ export class DetailsProposedThesisComponent implements OnInit {
       this.toast.successToast("Sukces!", `Praca dyplomowa ${this.these.name} została zaakceptowana.`)
     }, 
     err => {
+      console.error(err)
       this.toast.errorToast("Błąd!", `Praca dyplomowa ${this.these.name} nie została zaakceptowana. `)
     })
   }

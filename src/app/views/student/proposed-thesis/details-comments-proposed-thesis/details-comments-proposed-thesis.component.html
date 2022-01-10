@@ -18,7 +18,7 @@
                         <th scope="row">{{i+1}}</th>
                         <td>
                             <!-- {{comment.createdById}} -->
-                            <a [routerLink]="['/dashboards/user-details', comment.createdById]">{{getUserName(comment.createdById)}}</a>
+                            <a [routerLink]="['../../user-details', comment.createdById]">{{getUserName(comment.createdById)}}</a>
                         </td>
                         <td>{{comment.comment}}</td>
                     </tr>

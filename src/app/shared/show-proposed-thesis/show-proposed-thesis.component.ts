@@ -22,7 +22,7 @@ export class ShowProposedThesisComponent implements OnInit {
   these : IProposedThesisDto | undefined
   user: IUser
   studentId : number
-  displayedColumns: string[] = ['id', 'name', 'nameEnglish']
+  displayedColumns: string[] = ['id', 'name', 'nameEnglish', 'isAccepted']
   dataSource = new MatTableDataSource<IProposedThesisDto>()
   constructor(private auth: AuthService, private activatedRoute : ActivatedRoute, private propTheses: ProposedThesisService, private liveAnnouncer: LiveAnnouncer, private router : Router, private toast : ToastService) {
     this.theses = []

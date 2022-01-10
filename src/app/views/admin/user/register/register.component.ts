@@ -1,8 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
 import { IDepartmentDto } from 'src/app/interfaces/IDepartmentDto';
 import { AuthService } from 'src/app/services/auth.service';
 import { DepartmentService } from 'src/app/services/department.service';
@@ -40,7 +39,7 @@ export class RegisterComponent implements OnInit {
     { value: 3, viewValue: "Admin" },
   ]
 
-  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService, private departmentService: DepartmentService, private toast : ToastService) {
+  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService, private departmentService: DepartmentService, private toast: ToastService) {
 
     this.departmentService.getAll().subscribe((data: Department[]) => {
       this.departments = data
@@ -76,61 +75,60 @@ export class RegisterComponent implements OnInit {
     this.createForm()
 
   }
-  
-    onSubmit(){
-      
-      this.auth.register(this.form.value).subscribe(res => {
-        this.toast.successToast("Sukces!", "Nowy użytkownik został stworzony.")
-        this.form.reset()
-        this.form.controls['roleId'].setValue(1)
-        this.form.controls['departmentId'].setValue(this.departments[0].id)
-  
-        Object.keys(this.form.controls).forEach(key => {
-          this.form.get(key)?.setErrors(null)
-        })
-      }),
-      (errorResponse : HttpErrorResponse) => {
-        const messages = this.extractErrorMessagesFromErrorResponse(errorResponse)
-        this.formStatus.onFormSubmitResponse({success: false, messages: messages})
-      }
-      
-    }
 
+  onSubmit() {
 
+    this.auth.register(this.form.value).subscribe(res => {
+      this.toast.successToast("Sukces!", "Nowy użytkownik został stworzony.")
+      this.form.reset()
+      this.form.controls['roleId'].setValue(1)
+      this.form.controls['departmentId'].setValue(this.departments[0].id)
 
+      Object.keys(this.form.controls).forEach(key => {
+        this.form.get(key)?.setErrors(null)
+      })
+    }, err => {
+      this.toast.errorToast("Błąd!", "Wystąpił błąd podczas tworzenia nowego użytkownika")
+    })
+  }
 
-    extractErrorMessagesFromErrorResponse  = (errorRes : HttpErrorResponse) => {
-      // 1 - Create empty array to store errors
-      const errors = [];
+  extractErrorMessagesFromErrorResponse  = (errorRes : HttpErrorResponse) => {
+    // 1 - Create empty array to store errors
+    const errors = [];
 
-      // 2 - check if the error object is present in the response
-      if (errorRes.error) {
+    // 2 - check if the error object is present in the response
+    if (errorRes.error) {
 
-        // 3 - Push the main error message to the array of errors
-        errors.push(errorRes.error.message);
+      // 3 - Push the main error message to the array of errors
+      errors.push(errorRes.error.message);
 
-        // 4 - Check for Laravel form validation error messages object
-        if (errorRes.error.errors) {
+      // 4 - Check for Laravel form validation error messages object
+      if (errorRes.error.errors) {
 
-          // 5 - For each error property (which is a form field)
-          for (const property in errorRes.error.errors) {
+        // 5 - For each error property (which is a form field)
+        for (const property in errorRes.error.errors) {
 
-            if (errorRes.error.errors.hasOwnProperty(property)) {
+          if (errorRes.error.errors.hasOwnProperty(property)) {
 
-              // 6 - Extract it's array of errors
-              const propertyErrors: Array<string> = errorRes.error.errors[property];
+            // 6 - Extract it's array of errors
+            const propertyErrors: Array<string> = errorRes.error.errors[property];
 
-              // 7 - Push all errors in the array to the errors array
-              propertyErrors.forEach(error => errors.push(error));
-            }
-
+            // 7 - Push all errors in the array to the errors array
+            propertyErrors.forEach(error => errors.push(error));
           }
 
         }
 
       }
 
-      return errors;
-      }
+    }
+
+    return errors;
+    }
 
 }
+
+
+
+
+

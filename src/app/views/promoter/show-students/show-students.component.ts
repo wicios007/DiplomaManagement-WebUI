@@ -31,6 +31,8 @@ export class ShowStudentsComponent implements OnInit {
       this.dataSource.sort = this.sort
       this.users = data
       console.log(data)
+    }, err => {
+      console.error(err)
     })
   }
   //
