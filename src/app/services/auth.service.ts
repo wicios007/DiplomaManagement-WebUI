@@ -178,6 +178,7 @@ export class AuthService {
     localStorage.removeItem('userId')
     localStorage.removeItem('currentUserJSON')
     localStorage.removeItem('currentUserByToken')
+    localStorage.removeItem('user')
 
     // this.currentUser = undefined
 

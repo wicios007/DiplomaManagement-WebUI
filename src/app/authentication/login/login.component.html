@@ -1,5 +1,11 @@
 <div class="login-div">
     <mat-card>
+        <mat-card-header>
+            <picture>
+                <source srcset="https://pcz.pl/fcp/8GBUKOQtTKlQhbx08SlkTUQdKUWRuHQwFDBoIVURNWHlBG1gnBVcoFW8SBDRKTxMWRxcBFyUJT1hLd1YJXkRYMA/_users/code_zCFYXIghYYUQ6UhciCQgDRgBCAys2Qx0O/kamila/logo_nowe_pion.png">
+                <img mat-card-image src="" alt="Logo Politechniki Częstochowskiej" style="width: 200px; width: 200px; margin-right: 10%">
+            </picture>
+        </mat-card-header>
         <mat-card-title class="text-center">
             Logowanie
         </mat-card-title>
@@ -9,7 +15,7 @@
         <mat-card-content>
             <form class="d-flex flex-column" [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div>
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="fill" class="login-form-field">
                         <mat-label>Login</mat-label>
                         <input matInput [formControl]="$any(form).controls['email']">
                         <small
@@ -22,7 +28,7 @@
                 </div>
                 <div>
                    
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="fill" class="login-form-field">
                         <mat-label>Hasło</mat-label>
                         <input matInput type="password" [formControl]="$any(form).controls['password']">
                         <small
