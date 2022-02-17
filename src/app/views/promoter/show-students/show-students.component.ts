@@ -1,5 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -16,7 +17,6 @@ export class ShowStudentsComponent implements OnInit {
   users : IUser[]
   user! : IUser
   displayedColumns : string[] = ['firstName', 'lastName', 'email']
-  //dataSource = new MatTableDataSource<IUser>()
   dataSource : MatTableDataSource<IUser> = new MatTableDataSource<IUser>()
   constructor(private auth : AuthService, private router : Router, private liveAnnouncer : LiveAnnouncer, private toast : ToastService) { 
     this.user = JSON.parse(localStorage.getItem('user')!)
@@ -29,6 +29,7 @@ export class ShowStudentsComponent implements OnInit {
     this.auth.getUsersByRoleAndDepartment(this.user.departmentId, 2).subscribe((data : IUser[]) => {
       this.dataSource = new MatTableDataSource(data)
       this.dataSource.sort = this.sort
+      this.dataSource.paginator = this.paginator
       this.users = data
       console.log(data)
     }, err => {
@@ -38,6 +39,7 @@ export class ShowStudentsComponent implements OnInit {
   //
 
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   // ngAfterViewInit(){
   //   this.dataSource.sort = this.sort

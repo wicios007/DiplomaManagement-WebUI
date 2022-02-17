@@ -10,6 +10,13 @@ import { ShowStudentsComponent } from "./show-students/show-students.component";
 import { ShowPromoterThesesComponent } from './show-promoter-theses/show-promoter-theses.component';
 import { ShowThesisDetailsComponent } from './show-thesis-details/show-thesis-details.component';
 import { StudentModule } from "../student/student.module";
+import { ProposedThesesComponent } from './proposed-theses/proposed-theses.component';
+import { ProposedThesesShowComponent } from './proposed-theses/proposed-theses-show/proposed-theses-show.component';
+import { ProposedThesesAddComponent } from './proposed-theses/proposed-theses-add/proposed-theses-add.component';
+import { ProposedThesesSidebarComponent } from './proposed-theses/proposed-theses-sidebar/proposed-theses-sidebar.component';
+import { DetailsProposedThesisComponent } from './proposed-theses/details-proposed-thesis/details-proposed-thesis.component';
+import { DetailsCommentProposedThesisAddComponent } from './proposed-theses/details-comment-proposed-thesis-add/details-comment-proposed-thesis-add.component';
+import { DetailsCommentsProposedThesisComponent } from './proposed-theses/details-comments-proposed-thesis/details-comments-proposed-thesis.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +25,13 @@ import { StudentModule } from "../student/student.module";
     ShowStudentsComponent,
     ShowPromoterThesesComponent,
     ShowThesisDetailsComponent,
+    ProposedThesesComponent,
+    ProposedThesesShowComponent,
+    ProposedThesesAddComponent,
+    ProposedThesesSidebarComponent,
+    DetailsProposedThesisComponent,
+    DetailsCommentProposedThesisAddComponent,
+    DetailsCommentsProposedThesisComponent,
   ],
   imports: [
     CommonModule,

@@ -17,6 +17,7 @@ export class CommentsComponent implements OnInit {
   user : IUser
   users : IUser[] = []
   addCommentShow : boolean = false
+  thesisId : number = 0
 
   @Input() thesisIdEvent : number = 0
   @Input() showCommentsBtn : boolean = false
@@ -30,7 +31,10 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.thesisIdEvent)
-    this.propThesesComm.getAll(this.user.departmentId, this.thesisIdEvent).subscribe(data => {
+    this.activatedRoute.params.subscribe(response => {
+      this.thesisId = response.id
+    })
+    this.propThesesComm.getAll(this.user.departmentId, this.thesisId).subscribe(data => {
       this.comments = data;
       console.log(data)
     }, err => console.error(err),

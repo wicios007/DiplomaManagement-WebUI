@@ -18,8 +18,9 @@ export class ShowPromoterThesesComponent implements OnInit, AfterViewInit {
 
   theses: IThesisDto[]
   these : IThesisDto | undefined
+  users! : IUser[]
   user: IUser
-  displayedColumns: string[] = ['id', 'name', 'nameEnglish']
+  displayedColumns: string[] = ['id', 'name', 'fullName']
   dataSource = new MatTableDataSource<IThesisDto>()
   constructor(private router : Router, private auth : AuthService, private thesisService : ThesisService, private liveAnnouncer : LiveAnnouncer, private toast : ToastService) {
     this.theses = []
@@ -27,12 +28,7 @@ export class ShowPromoterThesesComponent implements OnInit, AfterViewInit {
     this.auth.currentUser = JSON.parse(localStorage.getItem('user')!)
     this.user = this.auth.currentUser
 
-    this.thesisService.getByPromoterId(this.user.departmentId, this.user.id).subscribe(data => {
-      this.theses = data
-      this.dataSource = new MatTableDataSource(data)
-      this.dataSource.sort = this.sort
-      console.log(data)
-    })
+    
 
     // this.auth.getCurrentUser().subscribe(data => {
     //   this.user = data
@@ -47,7 +43,22 @@ export class ShowPromoterThesesComponent implements OnInit, AfterViewInit {
    }
 
   ngOnInit(): void {
+    this.auth.getUsers().subscribe(data => {
+      this.users = data
+      this.thesisService.getByPromoterId(this.user.departmentId, this.user.id).subscribe(data => {
+        this.theses = data
+        this.dataSource = new MatTableDataSource(data)
+        console.log(this.theses);
+        this.dataSource.sort = this.sort
+        console.log(data)
+      })
+    }, err => {
+      console.error(err),
+      () => {
 
+      }
+    })
+    
   }
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -68,6 +79,8 @@ export class ShowPromoterThesesComponent implements OnInit, AfterViewInit {
     }
   }
 
+
+
   redirectTo(id : number){
     this.thesisService.getById(this.user.departmentId, id).subscribe(data => {
       console.log(data);
@@ -76,6 +89,11 @@ export class ShowPromoterThesesComponent implements OnInit, AfterViewInit {
     err => {
       this.toast.errorToast("Error", "Błąd podczas pobierania proponowanego tematu")
     })
+  }
+
+  showName(id : number){
+    const user = this.users.find(c => c.id == id)
+    return `${user?.firstName} ${user?.lastName}`
   }
 
 }

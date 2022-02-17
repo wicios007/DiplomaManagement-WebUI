@@ -1,6 +1,18 @@
 <div class="container">
-    <button class="btn btn-primary" routerLink="..">Powrót do listy</button>
-    <button class="btn btn-primary" (click) = "toggleComments()">{{showCommentsBtnText}}</button>
+    <div class="row">
+        <div class="justify-content-around d-flex flex-column">
+            <div class="col">
+                <button class="btn btn-primary btn-block" routerLink="..">Powrót do listy</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary btn-block" (click) = "toggleComments()">{{showCommentsBtnText}}</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary btn-block" (click)="acceptThesis()">Akceptuj</button>
+            </div>
+        </div>
+        
+    </div>
     <mat-card class="mat-card" style="padding-left: 10px">
         <mat-card-title class="mat-card-title">
             <div>

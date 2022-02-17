@@ -5,6 +5,7 @@ import { UserDetailsComponent } from 'src/app/shared/user-details/user-details.c
 import { AddProposedThesisComponent } from './proposed-thesis/add-proposed-thesis/add-proposed-thesis.component';
 import { DetailsProposedThesisComponent } from './proposed-thesis/details-proposed-thesis/details-proposed-thesis.component';
 import { ProposedThesisComponent } from './proposed-thesis/proposed-thesis.component';
+import { ShowProposedThesisByPromotersComponent } from './proposed-thesis/show-proposed-thesis-by-promoters/show-proposed-thesis-by-promoters.component';
 import { ShowProposedThesisComponent } from './proposed-thesis/show-proposed-thesis/show-proposed-thesis.component';
 import { SendEmailComponent } from './send-email/send-email.component';
 import { ShowPromotersComponent } from './show-promoters/show-promoters.component';
@@ -38,6 +39,14 @@ const routes: Routes = [
                         {
                             path: 'show',
                             component: ShowProposedThesisComponent,
+                        },
+                        {
+                            path: 'show-from-promoters',
+                            component: ShowProposedThesisByPromotersComponent
+                        },
+                        {
+                            path: 'show-from-promoters/:id',
+                            component: DetailsProposedThesisComponent
                         },
                         {
                             path: 'show/:id',

@@ -5,6 +5,9 @@ import { DetailsProposedThesisComponent } from 'src/app/shared/details-proposed-
 import { UserDetailsComponent } from 'src/app/shared/user-details/user-details.component';
 import { ShowThesisComponent } from '../student/thesis/show-thesis/show-thesis.component';
 import { PromoterComponent } from './promoter.component';
+import { ProposedThesesAddComponent } from './proposed-theses/proposed-theses-add/proposed-theses-add.component';
+import { ProposedThesesShowComponent } from './proposed-theses/proposed-theses-show/proposed-theses-show.component';
+import { ProposedThesesComponent } from './proposed-theses/proposed-theses.component';
 import { ShowPromoterThesesComponent } from './show-promoter-theses/show-promoter-theses.component';
 import { ShowStudentsComponent } from './show-students/show-students.component';
 import { ShowThesisDetailsComponent } from './show-thesis-details/show-thesis-details.component';
@@ -41,6 +44,21 @@ const routes: Routes = [
           {
             path: 'proposed-thesis/:id',
             component: DetailsProposedThesisComponent
+          },
+          {
+            path: 'proposed-theses',
+            component: ProposedThesesComponent,
+            children:
+            [
+              {
+                path: 'show-list',
+                component: ProposedThesesShowComponent
+              },
+              {
+                path: 'add',
+                component: ProposedThesesAddComponent
+              }
+            ]
           }
         ]
       },

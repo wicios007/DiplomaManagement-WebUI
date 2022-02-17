@@ -21,6 +21,8 @@ import {
   ConfirmBoxConfigModule,
   ToastNotificationConfigModule
 } from '@costlydeveloper/ngx-awesome-popup';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { getPolishPaginatorIntl } from './polish-paginator-intl';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import {
     FullComponent
   ],
   providers: [
-    AuthGuard, 
+    AuthGuard,
+    {provide: MatPaginatorIntl, useValue: getPolishPaginatorIntl()} 
   ],
   bootstrap: [AppComponent]
 })

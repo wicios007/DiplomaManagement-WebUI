@@ -1,0 +1,40 @@
+<router-outlet>
+    <div class="container mt-5 md-3">
+        <mat-card>
+            <mat-card-title class="text-center">
+                Dodanie proponowanego tematu pracy
+            </mat-card-title>
+            <mat-card-content>
+                <form class="d-flex flex-column" [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div>
+                        <mat-form-field class="input-full-width" appearance="fill">
+                            <mat-label>Temat</mat-label>
+                            <input matInput type="text" [formControl]="$any(form).controls['name']">
+                            <mat-error
+                                *ngIf="$any(form).controls['name'].hasError('required') && $any(form).controls['name'].touched"
+                                class="text-danger support-text">
+                                Temat pracy jest wymagany
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="input-full-width" appearance="fill">
+                            <mat-label>Temat po angielsku</mat-label>
+                            <input matInput type="text" [formControl]="$any(form).controls['nameEnglish']">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="input-full-width" appearance="fill">
+                            <mat-label>Opis</mat-label>
+                            <textarea matInput type="text"
+                                [formControl]="$any(form).controls['description']"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <button mat-raised-button color="primary" class="btn-block" type="submit"
+                    [disabled]="!$any(form).valid">Dodaj</button>
+
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</router-outlet>

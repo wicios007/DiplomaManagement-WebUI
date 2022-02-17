@@ -4,6 +4,7 @@ import { IProposedThesisDto } from 'src/app/interfaces/IProposedThesisDto';
 import { IUser } from 'src/app/interfaces/IUser';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProposedThesisService } from 'src/app/services/proposed-thesis.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-details-proposed-thesis',
@@ -21,7 +22,7 @@ export class DetailsProposedThesisComponent implements OnInit {
   @Output()
   thesisIdEvent: EventEmitter<number> = new EventEmitter();
 
-  constructor(private router : Router, private activatedRoute : ActivatedRoute, private propTheses : ProposedThesisService, private auth : AuthService) {
+  constructor(private router : Router, private activatedRoute : ActivatedRoute, private propTheses : ProposedThesisService, private auth : AuthService, private toast : ToastService) {
     this.showComments = false
     this.showCommentsBtnText = "Pokaż komentarze"
     this.thesisId = 0
@@ -52,6 +53,16 @@ export class DetailsProposedThesisComponent implements OnInit {
     //     })
     //   }
     // )
+  }
+
+  acceptThesis() : void { 
+    this.propTheses.accept(this.user.departmentId, this.thesisId).subscribe(data => {
+      console.log(data)
+      this.toast.successToast("Sukces!", "Temat pracy został zaakceptowany!")
+    }, err => {
+      console.error(err)
+      this.toast.errorToast("Błąd!", "Temat pracy nie został zaakceptowany.")
+    })
   }
 
   toggleComments(){

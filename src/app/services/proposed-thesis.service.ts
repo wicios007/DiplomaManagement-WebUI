@@ -42,6 +42,18 @@ export class ProposedThesisService {
       Authorization: `Bearer ${sessionStorage.getItem('token')}`
     })})
   }
+  getAllByPromoter(departmentId : number, promoterId : number){
+    return this.http.get<IProposedThesisDto[]>(`${this.ApiURL}department/${departmentId}/proposedThesis/promoter/${promoterId}`, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
+  }
+  getAllByPromoters(departmentId: number){
+    return this.http.get<IProposedThesisDto[]>(`${this.ApiURL}department/${departmentId}/proposedThesis/promoter`, { headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    })})
+  }
   create(departmentId : number, createPropThesisDto : any){
     return this.http.post<IProposedThesisCreateDto>(`${this.ApiURL}department/${departmentId}/proposedThesis`, createPropThesisDto, { headers: new HttpHeaders({
       'Content-Type': 'application/json',

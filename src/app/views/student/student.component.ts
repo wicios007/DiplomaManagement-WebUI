@@ -9,11 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class StudentComponent implements OnInit {
 
-  user : IUser
   constructor() { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('user')!)
   }
 
 }

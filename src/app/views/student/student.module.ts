@@ -19,6 +19,7 @@ import { ShowThesisComponent } from "./thesis/show-thesis/show-thesis.component"
 import { ThesisComponent } from "./thesis/thesis.component";
 import { ShowPromotersComponent } from './show-promoters/show-promoters.component';
 import { ThesisCardPdfComponent } from './thesis/thesis-card-pdf/thesis-card-pdf.component';
+import { ShowProposedThesisByPromotersComponent } from './proposed-thesis/show-proposed-thesis-by-promoters/show-proposed-thesis-by-promoters.component';
 
 
 
@@ -37,7 +38,8 @@ import { ThesisCardPdfComponent } from './thesis/thesis-card-pdf/thesis-card-pdf
         ThesisComponent,
         ShowThesisComponent,
         ShowPromotersComponent,
-        ThesisCardPdfComponent
+        ThesisCardPdfComponent,
+        ShowProposedThesisByPromotersComponent
     ],
     imports: [
         CommonModule,

@@ -1,0 +1,8 @@
+#thesis-card mat-card-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.input-full-width{
+    width: 100%
+}

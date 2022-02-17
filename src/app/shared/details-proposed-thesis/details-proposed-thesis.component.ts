@@ -14,12 +14,12 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class DetailsProposedThesisComponent implements OnInit {
 
-  these : IProposedThesisDto = {id:0, studentId:0, createdById:0, name:"", nameEnglish:"", description:"", isAccepted : false}
+  these : IProposedThesisDto = {id:0, studentId:0, createdById:0, name:"", nameEnglish:"", description:"default", isAccepted : false}
   user : IUser
   thesisId : number
   showComments : boolean
   showCommentsBtnText : string
-  student : IUser
+   student! : IUser
 
   @Output()
   thesisIdEvent: EventEmitter<number> = new EventEmitter();
@@ -31,6 +31,11 @@ export class DetailsProposedThesisComponent implements OnInit {
     this.auth.currentUser = JSON.parse(localStorage.getItem('user')!)
     this.user = this.auth.currentUser
     
+
+
+  }
+
+  ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
       console.log(res.id)
       this.thesisId = res.id
@@ -42,11 +47,10 @@ export class DetailsProposedThesisComponent implements OnInit {
     }, 
     err => console.error(err), 
     () => {
-      this.auth.getUserById(this.these.studentId).subscribe(data => this.student = data)
+      if(this.these.studentId !== 0){
+        this.auth.getUserById(this.these.studentId).subscribe(data => this.student = data)
+      }
     })
-  }
-
-  ngOnInit(): void {
   }
 
   toggleComments(){

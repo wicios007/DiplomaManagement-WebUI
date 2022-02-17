@@ -24,6 +24,12 @@
         </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
+    <ng-container matColumnDef="fullName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+            Imię i nazwisko studenta
+        </th>
+        <td mat-cell *matCellDef="let element"> {{showName(element.studentId)}} </td>
+    </ng-container>
 
     <ng-container matColumnDef="nameEnglish">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by nameEnglish">

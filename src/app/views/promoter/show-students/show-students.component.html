@@ -39,6 +39,9 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="redirectTo(row.id)"></tr>
             </table>
+            <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons aria-label="Wybierz stronę dla poszczególnych elementów">
+                
+            </mat-paginator>
         </div>
     </div>
 </router-outlet>
