@@ -12,6 +12,8 @@ export class ProposedThesisCommentsService {
 
   private ApiURL : string = environment.ApiURL
 
+  comments : ICommentDto[] = []
+
   constructor(private http: HttpClient, private auth : AuthService, private token : TokenService) { }
 
   private httpOptions = {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ICommentDto } from 'src/app/interfaces/ICommentDto';
 import { IUser } from 'src/app/interfaces/IUser';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProposedThesisCommentsService } from 'src/app/services/proposed-thesis-comments.service';
@@ -44,6 +45,8 @@ export class CommentsAddComponent implements OnInit {
       Object.keys(this.form.controls).forEach(key => {
         this.form.get(key)?.setErrors(null)
       })
+      var comment : ICommentDto = {createdById: this.user.id, comment: this.form.value.comment}
+      this.propThesisCommentService.comments.push(comment)
       this.toast.successToast("Sukces!", "Komentarz został dodany")
 
     }, err => {

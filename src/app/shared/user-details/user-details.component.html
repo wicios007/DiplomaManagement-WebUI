@@ -7,21 +7,26 @@
             <h3>Personalia: {{user.title}} {{user.firstName}} {{user.lastName}}</h3>
             <h3>Email: <a href="mailto:{{user.email}}">{{user.email}}</a></h3>
             <h3>Rola: {{user.roleName}}</h3>
-            <h3 *ngIf="departmentDto != undefined || departmentDto != null">Wydział: {{departmentDto.name}} {{departmentDto.initials}}</h3>
+            <h3 *ngIf="departmentDto != undefined || departmentDto != null">Wydział: {{departmentDto.name}}
+                {{departmentDto.initials}}</h3>
             <div *ngIf="!haveAcceptedThesis && user.roleName == 'Student'">
                 <h3>Ten student nie ma zaakceptowanego tematu pracy</h3>
             </div>
             <div *ngIf="haveAcceptedThesis && user.roleName == 'Student'">
                 <h3>Zaakceptowany temat pracy: {{thesis.name}}</h3>
             </div>
-            
-            
-
         </mat-card-content>
         <mat-card-actions>
-            <button class="btn btn-primary" (click)="showSendEmail()">Wyślij email</button>
+
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <button class="btn btn-light btn-outline-primary" (click)="showSendEmail()"
+                        style="width: 100%">Wyślij email</button>
+                </li>
+            </ul>
+
         </mat-card-actions>
     </mat-card>
     <app-send-email [destUser]="user" *ngIf="this.showSendEmailComponent"></app-send-email>
-    <app-show-proposed-thesis *ngIf="user.roleName == 'Student'"></app-show-proposed-thesis>
+    <app-show-proposed-thesis *ngIf="user.roleName == 'Student' || 'Promoter'"></app-show-proposed-thesis>
 </div>

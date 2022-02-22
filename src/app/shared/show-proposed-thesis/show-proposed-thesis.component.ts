@@ -21,27 +21,45 @@ export class ShowProposedThesisComponent implements OnInit {
   theses: IProposedThesisDto[]
   these : IProposedThesisDto | undefined
   user: IUser
-  studentId : number
+  userId : number
   displayedColumns: string[] = ['id', 'name', 'nameEnglish', 'isAccepted']
   dataSource = new MatTableDataSource<IProposedThesisDto>()
   constructor(private auth: AuthService, private activatedRoute : ActivatedRoute, private propTheses: ProposedThesisService, private liveAnnouncer: LiveAnnouncer, private router : Router, private toast : ToastService) {
     this.theses = []
     this.activatedRoute.params.subscribe(res => {
       console.log(res.id)
-      this.studentId = res.id
+      this.userId = res.id
     })
     this.auth.currentUser = JSON.parse(localStorage.getItem('user')!)
     this.user = this.auth.currentUser
   }
 
   ngOnInit(): void {
-    this.propTheses.getAllByStudent(this.auth.currentUser.departmentId, this.studentId).subscribe((data : IProposedThesisDto[]) => {
-        console.log(data)
-        this.dataSource = new MatTableDataSource(data)
-        this.dataSource.sort = this.sort
-        this.theses = data
-        console.log(data)
-    })
+    switch(this.user.roleName){
+      case 'Promoter':
+        this.propTheses.getAllByStudent(this.auth.currentUser.departmentId, this.userId).subscribe((data : IProposedThesisDto[]) => {
+          console.log(data)
+          this.dataSource = new MatTableDataSource(data)
+          this.dataSource.sort = this.sort
+          this.theses = data
+          console.log(data)
+      })
+        break;
+      case 'Student':
+        this.propTheses.getAllByPromoter(this.auth.currentUser.departmentId, this.userId).subscribe((data : IProposedThesisDto[]) => {
+          console.log(data)
+          this.dataSource = new MatTableDataSource(data)
+          this.dataSource.sort = this.sort
+          this.theses = data
+          console.log(data)
+      })
+        break;
+      default:
+        break; 
+    }
+      
+    
+    
     // this.auth.getCurrentUser().subscribe(data => {
     //   this.user = data
     //   console.log(this.user)

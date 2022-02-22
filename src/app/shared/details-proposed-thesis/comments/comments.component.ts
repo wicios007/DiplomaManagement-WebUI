@@ -26,6 +26,7 @@ export class CommentsComponent implements OnInit {
   constructor(private router : Router, private activatedRoute : ActivatedRoute, private propTheses : ProposedThesisService, private propThesesComm : ProposedThesisCommentsService, private auth : AuthService) {
     this.auth.currentUser = JSON.parse(localStorage.getItem('user')!)
     this.user = this.auth.currentUser
+    this.comments = this.propThesesComm.comments
   }
 
 

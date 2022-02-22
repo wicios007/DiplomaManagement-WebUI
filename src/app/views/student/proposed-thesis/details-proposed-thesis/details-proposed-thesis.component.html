@@ -1,37 +1,42 @@
-<div class="container">
-    <div class="row">
-        <div class="justify-content-around d-flex flex-column">
-            <div class="col">
-                <button class="btn btn-primary btn-block" routerLink="..">Powrót do listy</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-primary btn-block" (click) = "toggleComments()">{{showCommentsBtnText}}</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-primary btn-block" (click)="acceptThesis()">Akceptuj</button>
-            </div>
+<div class="row">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link active" routerLink=".."><button class="nav-btn btn btn-light btn-outline-primary">Powrót
+                    do listy</button></a>
+        </li>
+    </ul>
+</div>
+    <div class="container">
+<mat-card class="mat-card" style="padding-left: 10px">
+    <mat-card-title class="mat-card-title">
+        <div>
+            <h1>Tytuł: <b>{{these.name}}</b></h1>
         </div>
-        
-    </div>
-    <mat-card class="mat-card" style="padding-left: 10px">
-        <mat-card-title class="mat-card-title">
-            <div>
-                <h1>Tytuł: <b>{{these.name}}</b></h1>
-            </div>
-        </mat-card-title>
-        <mat-card-content class="mat-card-content">
-            <div class="row">
-                <h2>Tytuł po angielsku: <b>{{these.nameEnglish}}</b></h2>    
-            </div>
-            <div class="row">
-                <h3>Opis: <em>{{these.description}}</em></h3>
-            </div>
-        </mat-card-content>
-        <mat-card-actions class="mat-card-actions">
-            <!-- <app-details-comments-proposed-thesis (thesisId)="these.id" *ngIf="this.showComments"></app-details-comments-proposed-thesis> -->
-        </mat-card-actions>
-    </mat-card>
-    <div>
-        <app-details-comments-proposed-thesis [thesisIdEvent]="these.id" [showCommentsBtn]="true" *ngIf="this.showComments"></app-details-comments-proposed-thesis>
-    </div>
+    </mat-card-title>
+    <mat-card-content class="mat-card-content">
+        <div class="row">
+            <h2>Tytuł po angielsku: <b>{{these.nameEnglish}}</b></h2>
+        </div>
+        <div class="row">
+            <h3>Opis: <em>{{these.description}}</em></h3>
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="mat-card-actions">
+        <!-- <app-details-comments-proposed-thesis (thesisId)="these.id" *ngIf="this.showComments"></app-details-comments-proposed-thesis> -->
+    </mat-card-actions>
+</mat-card>
+</div>
+<div class="nav flex-column">
+    <li class="nav-item">
+        <a class="nav-link active"><button class="nav-btn btn btn-light btn-outline-primary"
+                (click)="acceptThesis()">Akceptuj</button></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active"><button class="nav-btn btn btn-light btn-outline-primary"
+                (click)="toggleComments()">{{showCommentsBtnText}}</button></a>
+    </li>
+</div>
+<div>
+    <app-details-comments-proposed-thesis [thesisIdEvent]="these.id" [showCommentsBtn]="true" *ngIf="this.showComments">
+    </app-details-comments-proposed-thesis>
 </div>
