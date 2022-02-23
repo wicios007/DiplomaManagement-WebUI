@@ -1,5 +1,9 @@
+<ul class="nav flex-column">
+    <li class="nav-item">
+        <button class="btn btn-light btn-outline-primary" (click)="showAddCommentBtn()" *ngIf="showCommentsBtn" style="width: 100%">Dodaj komentarz</button>
+    </li>
+</ul>
 <div class="container">
-    <button class="btn btn-primary" (click)="showAddCommentBtn()" *ngIf="showCommentsBtn">Dodaj komentarz</button>
     <div class="row">
         <app-shared-proposed-thesis-comments-add *ngIf="addCommentShow"></app-shared-proposed-thesis-comments-add>
 

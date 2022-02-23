@@ -13,7 +13,7 @@
                 <h3>Ten student nie ma zaakceptowanego tematu pracy</h3>
             </div>
             <div *ngIf="haveAcceptedThesis && user.roleName == 'Student'">
-                <h3>Zaakceptowany temat pracy: {{thesis.name}}</h3>
+                <h3>Zaakceptowany temat pracy: <a routerLink="../../proposed-thesis/{{thesis.id}}">{{thesis.name}}</a></h3>
             </div>
         </mat-card-content>
         <mat-card-actions>
