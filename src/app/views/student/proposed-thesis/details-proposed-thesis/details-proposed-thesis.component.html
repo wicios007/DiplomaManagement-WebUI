@@ -27,7 +27,7 @@
 </mat-card>
 </div>
 <div class="nav flex-column">
-    <li class="nav-item">
+    <li *ngIf="these.createdById != user.id" class="nav-item">
         <a class="nav-link active"><button class="nav-btn btn btn-light btn-outline-primary"
                 (click)="acceptThesis()">Akceptuj</button></a>
     </li>

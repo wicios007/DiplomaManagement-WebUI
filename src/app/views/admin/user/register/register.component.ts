@@ -67,7 +67,6 @@ export class RegisterComponent implements OnInit {
       departmentId: [null],
       promoterTitle: [null],
       studentIndexNumber: [null, Validators.compose([Validators.pattern("([0-9]+)")])],
-
     })
   }
 
